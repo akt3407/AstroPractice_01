@@ -1,0 +1,91 @@
+---
+import { Image } from "astro:assets";
+
+import logo from "@/assets/logo-header.svg";
+import ArrowIcon from "@/svgs/arrow.svg?raw";
+---
+
+<header
+  id="site-header"
+  class="group flex flex-wrap justify-between items-center py-3.75 pl-5 pr-6 border border-border bg-white fixed top-4 inset-x-2.5"
+>
+  <a href="/">
+    <Image
+      src={logo}
+      alt="AstroPractice"
+      width={52.8}
+      height={14.82}
+      class="h-auto"
+      style="width: clamp(33px, 5vw, 52.8px)"
+    />
+  </a>
+  <button
+    id="menu-button"
+    class="flex flex-col gap-y-1 md:hidden"
+    type="button"
+    aria-label="メニューを開く"
+    aria-expanded="false"
+    aria-controls="nav-menu"
+  >
+    <span aria-hidden="true" class="block w-[17px] h-px bg-black transition-transform duration-300 origin-center group-data-[menu-open=true]:translate-y-[2.5px] group-data-[menu-open=true]:rotate-45"
+    ></span>
+    <span aria-hidden="true" class="block w-[17px] h-px bg-black transition-transform duration-300 origin-center group-data-[menu-open=true]:-translate-y-[2.5px] group-data-[menu-open=true]:-rotate-45"
+    ></span>
+  </button>
+  <nav
+    aria-label="グローバルナビゲーション"
+    id="nav-menu"
+    class="hidden md:block group-data-[menu-open=true]:block w-full mt-6.5"
+  >
+    <ul class="flex flex-col font-mono text-[0.875rem] divide-y divide-border">
+      <li class="py-4">
+        <a href="#about">ABOUT</a>
+      </li>
+      <li class="py-4">
+        <a href="#feature">FEATURE</a>
+      </li>
+      <li class="py-4">
+        <a href="#product">PRODUCT</a>
+      </li>
+      <li class="py-4">
+        <a href="#gallery">GALLERY</a>
+      </li>
+      <li class="py-4">
+        <!-- SP用CONTACT -->
+        <a
+          href="#"
+          class="md:hidden flex gap-2.5 items-center"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CONTACT
+          <Fragment set:html={ArrowIcon} />
+          <span class="sr-only">（新しいタブで開く）</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- PC用CONTACT -->
+  <a href="#" class="hidden md:block" target="_blank" rel="noopener noreferrer">
+    CONTACT
+    <Fragment set:html={ArrowIcon} />
+    <span class="sr-only">（新しいタブで開く）</span>
+  </a>
+</header>
+
+<script>
+  const button = document.getElementById("menu-button")!;
+  const header = document.getElementById("site-header")!;
+
+  button.addEventListener("click", () => {
+    const isOpen = button.getAttribute("aria-expanded") === "true";
+    const nextOpen = !isOpen;
+
+    button.setAttribute("aria-expanded", String(nextOpen));
+    button.setAttribute(
+      "aria-label",
+      nextOpen ? "メニューを閉じる" : "メニューを開く",
+    );
+    header.dataset.menuOpen = String(nextOpen);
+  });
+</script>

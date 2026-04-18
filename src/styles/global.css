@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* デザイントークン */
+@theme {
+  /* フォント */
+  --font-sans: "Noto Sans JP", sans-serif;
+  --font-mono: "Lato", monospace;
+
+  /* font-size（基準幅: 1440px） */
+  --font-size-170: clamp(5.5rem, 11.8vw, 10.625rem); /* 88〜170px */
+  --font-size-64: clamp(2.5rem, 4.44vw, 4rem); /* 40〜64px */
+  --font-size-34: clamp(1.75rem, 2.36vw, 2.125rem); /* 28〜34px */
+  --font-size-32: clamp(1.5rem, 2.22vw, 2rem); /* 24〜32px */
+  --font-size-24: clamp(1.25rem, 1.67vw, 1.5rem); /* 20〜24px */
+  --font-size-16a: clamp(0.875rem, 1.11vw, 1rem); /* 14〜16px */
+  --font-size-16b: clamp(0.75rem, 1.11vw, 1rem); /* 12〜16px */
+  --font-size-14: clamp(0.8125rem, 0.97vw, 0.875rem); /* 13〜14px */
+  --font-size-12: clamp(0.625rem, 0.83vw, 0.75rem); /* 10〜12px */
+
+  /* 色 */
+  --color-*: initial;
+
+  --color-white: #ffffff;
+  --color-black: #222222;
+  --color-bg-white: #f2f2f2;
+
+  --color-border: #d7d7d7;
+  --color-border-dark: #4b4b4b;
+}
+
+@utility text-64/120 {
+  font-size: var(--font-size-64);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+}
+
+@utility text-34/150 {
+  font-size: var(--font-size-34);
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+@utility text-32/150 {
+  font-size: var(--font-size-32);
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+@utility text-16/180 {
+  font-size: var(--font-size-16a);
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+}
+
+@utility text-14/150 {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+/* ベーススタイル */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    line-height: 1;
+    color: var(--color-black);
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* 日本語の禁則処理 */
+  p,
+  li,
+  h1,
+  h2,
+  h3,
+  h4 {
+    overflow-wrap: break-word;
+    word-break: auto-phrase;
+  }
+}
