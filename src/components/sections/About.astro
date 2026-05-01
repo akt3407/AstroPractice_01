@@ -1,0 +1,123 @@
+---
+import { Image } from "astro:assets";
+
+import aboutImage01 from "@/assets/img-about-01.jpg";
+import aboutImage02 from "@/assets/img-about-02.jpg";
+import aboutImage03 from "@/assets/img-about-03.jpg";
+import SectionHeading from "@/components/ui/section/SectionHeading.astro";
+import SectionLabel from "@/components/ui/section/SectionLabel.astro";
+---
+
+<section id="about">
+  <div class="px-20 pt-86 md:px-30 md:pt-150">
+    <div class="md:pl-117">
+      <SectionLabel label="(ABOUT)" />
+      <SectionHeading
+        >目的を持ってつくられ、<br class="md:hidden" />
+        時を超えて愛される家具。</SectionHeading
+      >
+      <p
+        class="text-16a/[1.8] mt-14 h-264 tracking-[0.04em] md:mt-30 md:ml-4 md:h-150"
+      >
+        KOZOUでは、家具は単なる道具ではなく、そこに込め<br
+          class="md:hidden"
+        />られた手仕事・想い・文化の結晶だと考えています。<br
+          class="hidden md:block"
+        />私<br
+          class="md:hidden"
+        />たちが届ける家具はすべて、熟練の職人が素材選びか<br
+          class="md:hidden"
+        />ら仕上げまで一貫して丁寧に手がけた一点ものです。<br
+          class="hidden md:block"
+        />
+        「使い手の心に響き、時間とともに美しく育ち、語るべ<br
+          class="md:hidden"
+        />き物語を持つ家具」それが私たちの目指すものづくり<br
+          class="md:hidden"
+        />です。<br
+          class="hidden md:block"
+        />すべての家具が唯一無二である理由。<br class="md:hidden" />
+        それは、すべての手と人生が唯一無二だから。<br />
+        伝統への敬意と、普遍的な美意識を持って、世代を超<br
+          class="md:hidden"
+        />えて受け継がれる家具を、今日もひとつずつ、丁寧に。
+      </p>
+    </div>
+    <div class="mt-60 md:mt-99 md:flex md:items-start">
+      <Image
+        class="aspect-246/183 w-246 md:aspect-447/332 md:w-447"
+        src={aboutImage01}
+        alt=""
+      />
+      <Image
+        class="mt-38 ml-auto aspect-246/327 w-246 md:mt-0 md:ml-20 md:aspect-913/685 md:w-913"
+        src={aboutImage02}
+        alt=""
+      />
+    </div>
+    <div
+      class="marquee-wrap relative mt-98 overflow-hidden whitespace-nowrap md:mt-130"
+    >
+      <p class="text-170 animation-scroll-rtl inline-block">
+        FOUNDED IN 1998,FOUNDED IN 1998,
+      </p>
+    </div>
+  </div>
+  <div
+    class="mt-87 flex flex-col px-20 pb-80 md:mt-136 md:flex-row-reverse md:items-center md:justify-end md:gap-137 md:px-0 md:pb-122"
+  >
+    <div>
+      <h2 class="text-32/normal font-medium tracking-[0.04em]">
+        熟練の職人による緻密な設計
+      </h2>
+      <p class="text-16a/[1.8] mt-14 tracking-[0.04em] md:mt-30">
+        手道具だけを使い、時間をかけて、丁寧に。<br />
+        その椅子は今も、友人の家にあります。<br />
+        すっかり馴染みながらも、決して壊れていない。<br />
+        それは、私たちの原点であり、<br />
+        ものづくりの本質を思い出させてくれる存在です。
+      </p>
+    </div>
+    <Image
+      class="mt-37 aspect-335/273 w-335 md:mt-0 md:aspect-593/644 md:w-593"
+      src={aboutImage03}
+      alt=""
+    />
+  </div>
+</section>
+
+<style>
+  .marquee-wrap::before,
+  .marquee-wrap::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .marquee-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, #f2f2f2 0%, transparent 100%);
+  }
+
+  .marquee-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, #f2f2f2 0%, transparent 100%);
+  }
+
+  @keyframes scroll-rtl {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animation-scroll-rtl {
+    animation: scroll-rtl 20s linear infinite;
+  }
+</style>

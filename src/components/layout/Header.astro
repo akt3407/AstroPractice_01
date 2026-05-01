@@ -7,7 +7,7 @@ import ArrowIcon from "@/svgs/arrow.svg?raw";
 
 <header
   id="site-header"
-  class="group flex flex-wrap justify-between items-center py-3.75 pl-5 pr-6 border border-border bg-white fixed top-4 inset-x-2.5"
+  class="group border-border fixed inset-x-10 top-16 z-10 flex flex-wrap items-center justify-between border bg-white py-15 pr-24 pl-20 md:py-7 md:pr-6 md:pl-16"
 >
   <a href="/">
     <Image
@@ -21,40 +21,46 @@ import ArrowIcon from "@/svgs/arrow.svg?raw";
   </a>
   <button
     id="menu-button"
-    class="flex flex-col gap-y-1 md:hidden"
+    class="flex flex-col gap-y-4 md:hidden"
     type="button"
     aria-label="メニューを開く"
     aria-expanded="false"
     aria-controls="nav-menu"
   >
-    <span aria-hidden="true" class="block w-[17px] h-px bg-black transition-transform duration-300 origin-center group-data-[menu-open=true]:translate-y-[2.5px] group-data-[menu-open=true]:rotate-45"
+    <span
+      aria-hidden="true"
+      class="block h-px w-[17px] origin-center bg-black transition-transform duration-1000 ease-out group-data-[menu-open=true]:translate-y-[2.5px] group-data-[menu-open=true]:rotate-45"
     ></span>
-    <span aria-hidden="true" class="block w-[17px] h-px bg-black transition-transform duration-300 origin-center group-data-[menu-open=true]:-translate-y-[2.5px] group-data-[menu-open=true]:-rotate-45"
+    <span
+      aria-hidden="true"
+      class="block h-px w-[17px] origin-center bg-black transition-transform duration-1000 ease-out group-data-[menu-open=true]:-translate-y-[2.5px] group-data-[menu-open=true]:-rotate-45"
     ></span>
   </button>
   <nav
     aria-label="グローバルナビゲーション"
     id="nav-menu"
-    class="hidden md:block group-data-[menu-open=true]:block w-full mt-6.5"
+    class="max-h-0 w-full overflow-hidden transition-[max-height] duration-1000 ease-out group-data-[menu-open=true]:max-h-[327px] md:mt-0 md:flex md:max-h-none md:w-auto md:overflow-visible md:transition-none"
   >
-    <ul class="flex flex-col font-mono text-[0.875rem] divide-y divide-border">
-      <li class="py-4">
+    <ul
+      class="divide-border flex flex-col divide-y font-mono text-[1.4rem] md:flex-row md:gap-x-20 md:divide-y-0"
+    >
+      <li class="pt-42 pb-16 md:py-16">
         <a href="#about">ABOUT</a>
       </li>
-      <li class="py-4">
+      <li class="py-16">
         <a href="#feature">FEATURE</a>
       </li>
-      <li class="py-4">
+      <li class="py-16">
         <a href="#product">PRODUCT</a>
       </li>
-      <li class="py-4">
+      <li class="py-16">
         <a href="#gallery">GALLERY</a>
       </li>
-      <li class="py-4">
+      <li class="py-16">
         <!-- SP用CONTACT -->
         <a
           href="#"
-          class="md:hidden flex gap-2.5 items-center"
+          class="flex items-center gap-10 md:hidden"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -66,16 +72,28 @@ import ArrowIcon from "@/svgs/arrow.svg?raw";
     </ul>
   </nav>
   <!-- PC用CONTACT -->
-  <a href="#" class="hidden md:block" target="_blank" rel="noopener noreferrer">
+  <a
+    href="#"
+    class="md:border-border md:text-12 hidden md:flex md:items-center md:gap-16 md:border md:py-14 md:pr-10 md:pl-16 md:leading-[1.4] md:font-medium"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     CONTACT
     <Fragment set:html={ArrowIcon} />
     <span class="sr-only">（新しいタブで開く）</span>
   </a>
 </header>
 
+<div
+  id="overlay"
+  class="pointer-events-none fixed inset-0 z-9 bg-white/40 opacity-0 backdrop-blur-md transition-opacity duration-1000 ease-out"
+>
+</div>
+
 <script>
   const button = document.getElementById("menu-button")!;
   const header = document.getElementById("site-header")!;
+  const overlay = document.getElementById("overlay")!;
 
   button.addEventListener("click", () => {
     const isOpen = button.getAttribute("aria-expanded") === "true";
@@ -87,5 +105,17 @@ import ArrowIcon from "@/svgs/arrow.svg?raw";
       nextOpen ? "メニューを閉じる" : "メニューを開く",
     );
     header.dataset.menuOpen = String(nextOpen);
+  });
+
+  button?.addEventListener("click", () => {
+    overlay?.classList.toggle("opacity-0");
+    overlay?.classList.toggle("pointer-events-none");
+  });
+
+  overlay?.addEventListener("click", () => {
+    overlay?.classList.add("opacity-0", "pointer-events-none");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-label", "メニューを開く");
+    header.dataset.menuOpen = "false";
   });
 </script>

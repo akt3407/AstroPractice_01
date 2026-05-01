@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "astro-practice_01",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -31,6 +31,7 @@
     "eslint-plugin-unused-imports": "^4.4.1",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "0.0.0-insiders.f7d2598",
     "typescript-eslint": "^8.58.2"
   }
 }

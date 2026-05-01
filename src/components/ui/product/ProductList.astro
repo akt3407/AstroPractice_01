@@ -1,0 +1,19 @@
+---
+import { Image } from "astro:assets";
+
+import imgProduct from "@/assets/img-product.jpg";
+---
+
+<div>
+  <Image
+    class="aspect-158/219 w-158 md:aspect-330/465 md:w-330"
+    src={imgProduct}
+    alt="木の椅子"
+  />
+  <div
+    class="text-12 mt-7 flex items-center justify-between font-mono tracking-[0.01em]"
+  >
+    <p>001</p>
+    <p>PRODUCT</p>
+  </div>
+</div>

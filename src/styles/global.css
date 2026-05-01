@@ -2,20 +2,24 @@
 
 /* デザイントークン */
 @theme {
+  /* スペーシング（1単位 = 1px） */
+  --spacing: 0.1rem;
+
   /* フォント */
   --font-sans: "Noto Sans JP", sans-serif;
   --font-mono: "Lato", monospace;
 
   /* font-size（基準幅: 1440px） */
-  --font-size-170: clamp(5.5rem, 11.8vw, 10.625rem); /* 88〜170px */
-  --font-size-64: clamp(2.5rem, 4.44vw, 4rem); /* 40〜64px */
-  --font-size-34: clamp(1.75rem, 2.36vw, 2.125rem); /* 28〜34px */
-  --font-size-32: clamp(1.5rem, 2.22vw, 2rem); /* 24〜32px */
-  --font-size-24: clamp(1.25rem, 1.67vw, 1.5rem); /* 20〜24px */
-  --font-size-16a: clamp(0.875rem, 1.11vw, 1rem); /* 14〜16px */
-  --font-size-16b: clamp(0.75rem, 1.11vw, 1rem); /* 12〜16px */
-  --font-size-14: clamp(0.8125rem, 0.97vw, 0.875rem); /* 13〜14px */
-  --font-size-12: clamp(0.625rem, 0.83vw, 0.75rem); /* 10〜12px */
+  --text-170: clamp(8.8rem, 11.81vw, 17rem); /* 88〜170px */
+  --text-64: clamp(4rem, 4.44vw, 6.4rem); /* 40〜64px */
+  --text-34: clamp(2.8rem, 2.36vw, 3.4rem); /* 28〜34px */
+  --text-32: clamp(2.4rem, 2.22vw, 3.2rem); /* 24〜32px */
+  --text-24a: clamp(2rem, 1.67vw, 2.4rem); /* 20〜24px */
+  --text-24b: clamp(1.8rem, 1.67vw, 2.4rem); /* 18〜24px */
+  --text-16a: clamp(1.4rem, 1.11vw, 1.6rem); /* 14〜16px */
+  --text-16b: clamp(1.2rem, 1.11vw, 1.6rem); /* 12〜16px */
+  --text-14: clamp(1.3rem, 0.97vw, 1.4rem); /* 13〜14px */
+  --text-12: clamp(1rem, 0.83vw, 1.2rem); /* 10〜12px */
 
   /* 色 */
   --color-*: initial;
@@ -26,36 +30,6 @@
 
   --color-border: #d7d7d7;
   --color-border-dark: #4b4b4b;
-}
-
-@utility text-64/120 {
-  font-size: var(--font-size-64);
-  line-height: 1.2;
-  letter-spacing: 0.04em;
-}
-
-@utility text-34/150 {
-  font-size: var(--font-size-34);
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-}
-
-@utility text-32/150 {
-  font-size: var(--font-size-32);
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-}
-
-@utility text-16/180 {
-  font-size: var(--font-size-16a);
-  line-height: 1.8;
-  letter-spacing: 0.04em;
-}
-
-@utility text-14/150 {
-  font-size: 0.875rem;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
 }
 
 /* ベーススタイル */
@@ -70,19 +44,30 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    font-size: calc(10 / 375 * 100vw);
+  }
+  @media (min-width: 768px) {
+    html {
+      font-size: calc(10 / 1440 * 100vw);
+    }
   }
 
   body {
     font-family: var(--font-sans);
     line-height: 1;
     color: var(--color-black);
+    font-feature-settings: "palt";
+    font-weight: 400;
+    background: var(--color-bg-white);
   }
 
   img,
   video {
+    width: 100%;
     max-width: 100%;
     height: auto;
     display: block;
+    object-fit: cover;
   }
 
   /* 日本語の禁則処理 */

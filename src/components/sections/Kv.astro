@@ -1,0 +1,33 @@
+---
+import kvImageSp from "@/assets/img-kv-sp.jpg";
+import kvImage from "@/assets/img-kv.jpg";
+import KvResponsiveImage from "@/components/ui/kv/KvResponsiveImage.astro";
+---
+
+<section class="h-svh">
+  <div>
+    <KvResponsiveImage desktopSrc={kvImage} mobileSrc={kvImageSp} alt="" />
+  </div>
+  <div class="relative z-5">
+    <div class="absolute bottom-140 left-20 md:bottom-70 md:left-30">
+      <h1 class="text-64/[1.2] font-bold tracking-[0.02em] text-white">
+        あなたとともに、<br />
+        変化する家具
+      </h1>
+      <p class="mt-41 text-[1.4rem]/normal font-medium text-white md:mt-29">
+        木の香り、手のぬくもり、時間が育てる風合い<br />
+        ここにしかない家具を、あなたの暮らしへ。
+      </p>
+    </div>
+    <div
+      class="absolute bottom-41 left-20 flex items-center justify-start gap-x-8 md:right-34 md:bottom-70 md:left-auto"
+    >
+      <div
+        class="flex aspect-square h-auto w-20 items-center justify-center rounded-full bg-white"
+      >
+        <span class="aspect-square h-auto w-4 rounded-full bg-black"></span>
+      </div>
+      <span class="font-mono text-base font-bold text-white">ScrollDown</span>
+    </div>
+  </div>
+</section>

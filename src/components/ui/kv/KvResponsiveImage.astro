@@ -1,0 +1,54 @@
+---
+import { getImage } from "astro:assets";
+
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  mobileSrc: ImageMetadata;
+  desktopSrc: ImageMetadata;
+  alt: string;
+  breakpoint?: number;
+  class?: string;
+}
+
+const {
+  mobileSrc,
+  desktopSrc,
+  alt,
+  breakpoint = 768,
+  class: className,
+} = Astro.props;
+
+const mobileImage = await getImage({
+  src: mobileSrc,
+  width: 768,
+  format: "webp",
+});
+const desktopImage = await getImage({
+  src: desktopSrc,
+  width: 1440,
+  format: "webp",
+});
+
+const fallbackImage = await getImage({
+  src: desktopSrc,
+  width: 1440,
+  format: "jpg",
+});
+---
+
+<picture class={className}>
+  <source
+    media={`(min-width: ${breakpoint}px)`}
+    srcset={desktopImage.src}
+    type="image/webp"
+  />
+  <source srcset={mobileImage.src} type="image/webp" />
+  <img
+    src={fallbackImage.src}
+    alt={alt}
+    loading="lazy"
+    decoding="async"
+    class="aspect-375/812 md:aspect-1440/880 w-full h-svh"
+  />
+</picture>
