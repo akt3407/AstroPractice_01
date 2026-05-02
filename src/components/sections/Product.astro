@@ -9,20 +9,22 @@ const productLists = Array.from({ length: 12 }, (_, i) => ({
 ---
 
 <section class="bg-black text-white">
-  <div class="px-20 pt-86 text-center">
+  <div class="px-20 py-80 text-center md:px-30 md:py-120">
     <SectionLabel label="(PRODUCT)" />
-    <SectionHeading
+    <SectionHeading class="md:mt-31"
       >一つひとつ、丁寧に。<br
         class="md:hidden"
       />ずっと使えるように。</SectionHeading
     >
-    <p class="text-16a/loose mt-10 tracking-[0.04em]">
+    <p class="text-16a/loose mt-10 tracking-[0.04em] md:mt-30">
       椅子やテーブル、どの家具にも<br class="md:hidden" />
       “あなただけの物語”が宿ります。<br />
       サイズ、木材、仕上げをお選びいただけます。<br />
       お届けするのは、家具という名の一生の相棒です。
     </p>
-    <div class="mt-49 grid grid-cols-2 gap-x-20 gap-y-16">
+    <div
+      class="mt-49 grid grid-cols-2 gap-x-20 gap-y-16 md:mt-100 md:grid-cols-4 md:gap-y-40"
+    >
       {productLists.map((product) => <ProductList id={product.id} />)}
     </div>
   </div>

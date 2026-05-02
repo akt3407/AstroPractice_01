@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+
+import SectionLabel from "../ui/section/SectionLabel.astro";
+
+import imgGallery1 from "@/assets/img-gallery-01.jpg";
+import imgGallery2 from "@/assets/img-gallery-02.jpg";
+import imgGallery3 from "@/assets/img-gallery-03.jpg";
+import imgGallery4 from "@/assets/img-gallery-04.jpg";
+import imgGallery5 from "@/assets/img-gallery-05.jpg";
+---
+
+<section class="bg-black text-white">
+  <div class="relative px-20 py-35 md:px-30 md:pt-20 md:pb-140">
+    <SectionLabel label="(GALLERY)" />
+    <div class="mt-32 md:mt-80">
+      <Image
+        class="aspect-335/418 w-335 md:aspect-447/558 md:w-447"
+        src={imgGallery1}
+        alt="Cozy Minimalist Interior"
+      />
+      <Image
+        class="mt-20 aspect-335/235 w-335 md:mt-140 md:ml-583 md:aspect-680/476 md:w-680"
+        src={imgGallery2}
+        alt="Modern Living Room Scene"
+      />
+      <Image
+        class="mt-20 aspect-335/443 w-335 md:mt-140 md:ml-117 md:aspect-564/747 md:w-564"
+        src={imgGallery3}
+        alt="Wooden Rattan Dressers"
+      />
+      <Image
+        class="mt-20 aspect-335/503 w-335 md:mt-140 md:ml-583 md:aspect-680/1019 md:w-680"
+        src={imgGallery4}
+        alt="Rustic Serenity Wooden Chair"
+      />
+      <Image
+        class="mt-20 aspect-335/280 w-335 md:absolute md:bottom-0 md:left-0 md:mt-0 md:aspect-1440/1203 md:w-1440"
+        src={imgGallery5}
+        alt="Scandinavian Living Room"
+      />
+    </div>
+  </div>
+</section>
