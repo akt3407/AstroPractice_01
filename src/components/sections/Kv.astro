@@ -23,11 +23,56 @@ import KvResponsiveImage from "@/components/ui/kv/KvResponsiveImage.astro";
       class="absolute bottom-41 left-20 flex items-center justify-start gap-x-8 md:right-34 md:bottom-70 md:left-auto"
     >
       <div
-        class="flex aspect-square h-auto w-20 items-center justify-center rounded-full bg-white"
+        class="flex aspect-square h-auto w-20 items-center justify-center overflow-hidden rounded-full bg-white"
       >
-        <span class="aspect-square h-auto w-4 rounded-full bg-black"></span>
+        <span class="scroll-dot aspect-square h-auto w-4 rounded-full bg-black"
+        ></span>
       </div>
       <span class="font-mono text-base font-bold text-white">ScrollDown</span>
     </div>
   </div>
 </section>
+
+<style>
+  @keyframes scroll-dot {
+    0% {
+      transform: translateY(-300%);
+    }
+    100% {
+      transform: translateY(300%);
+    }
+  }
+
+  .scroll-dot {
+    animation: scroll-dot 1.2s ease-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-dot {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const target = document.querySelector<HTMLElement>("[data-kv-parallax]");
+    const trigger = target?.closest("section") ?? target;
+    if (target && trigger) {
+      gsap.to(target, {
+        yPercent: -10,
+        ease: "none",
+        scrollTrigger: {
+          trigger,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }
+  }
+</script>

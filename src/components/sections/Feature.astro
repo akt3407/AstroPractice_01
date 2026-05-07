@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
 
+import FadeIn from "../ui/common/FadeIn.astro";
+
 import type { ImageMetadata } from "astro";
 
 import bgFeature from "@/assets/bg-feature.jpg";
@@ -53,18 +55,20 @@ const cards: Props[] = [
     <SectionHeading>
       <span class="text-34 font-mono md:ml-2">KAGU</span>の特徴
     </SectionHeading>
-    <p class="text-16a/[1.8] mt-14 md:mt-27 md:ml-4">
-      本物のクラフトマンシップは、静かな細部に宿ると私た<br
-        class="md:hidden"
-      />ちは考えます。<br
-        class="hidden md:block"
-      />脚のわずかな曲線、見えない部分の仕<br
-        class="md:hidden"
-      />口、手ざわりまで磨き上げたエッジ。<br />
-      それらは偶然ではなく、心と時間を込めた「選択」です。<br /> すべてのディテールに意味があるとき、家具は忘れら<br
-        class="md:hidden"
-      />れない存在になるのです。
-    </p>
+    <FadeIn>
+      <p class="text-16a/[1.8] mt-14 md:mt-27 md:ml-4">
+        本物のクラフトマンシップは、静かな細部に宿ると私た<br
+          class="md:hidden"
+        />ちは考えます。<br
+          class="hidden md:block"
+        />脚のわずかな曲線、見えない部分の仕<br
+          class="md:hidden"
+        />口、手ざわりまで磨き上げたエッジ。<br />
+        それらは偶然ではなく、心と時間を込めた「選択」です。<br /> すべてのディテールに意味があるとき、家具は忘れら<br
+          class="md:hidden"
+        />れない存在になるのです。
+      </p>
+    </FadeIn>
     <div class="mt-76 md:mt-100">
       {
         cards.map((card, i) => (
@@ -78,15 +82,17 @@ const cards: Props[] = [
               </h3>
             </div>
             <div>
-              <p
-                class="text-16a/[1.8] mt-10 tracking-[0.04em] md:mt-0"
-                set:html={card.description}
-              />
-              <Image
-                src={featureImageList[i]}
-                alt={card.title}
-                class="mt-26 aspect-334/195 w-full md:aspect-330/193 md:w-330"
-              />
+              <FadeIn group>
+                <p
+                  class="text-16a/[1.8] mt-10 tracking-[0.04em] md:mt-0"
+                  set:html={card.description}
+                />
+                <Image
+                  src={featureImageList[i]}
+                  alt={card.title}
+                  class="mt-26 aspect-334/195 w-full md:aspect-330/193 md:w-330"
+                />
+              </FadeIn>
             </div>
           </div>
         ))

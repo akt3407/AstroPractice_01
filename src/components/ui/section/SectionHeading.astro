@@ -8,9 +8,15 @@ const { class: className = "" } = Astro.props;
 
 <h2
   class:list={[
-    "text-32/normal mt-16 font-medium tracking-[0.04em] md:mt-20",
+    "text-32/normal mt-16 overflow-hidden font-medium tracking-[0.04em] md:mt-20",
     className,
   ]}
+  data-section-label
 >
-  <slot />
+  <span
+    class="inline-block transform-[translateY(100%)] will-change-transform motion-reduce:transform-[translateY(0)]"
+    data-section-label-text
+  >
+    <slot />
+  </span>
 </h2>

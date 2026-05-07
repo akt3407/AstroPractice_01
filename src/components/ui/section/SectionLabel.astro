@@ -6,4 +6,12 @@ interface Props {
 const { label } = Astro.props;
 ---
 
-<small class="text-16a font-mono font-bold md:ml-4">{label}</small>
+<small
+  class="text-16a inline-block overflow-hidden font-mono leading-none font-bold md:ml-4"
+  data-section-label
+>
+  <span
+    class="inline-block transform-[translateY(100%)] will-change-transform motion-reduce:transform-[translateY(0)]"
+    data-section-label-text>{label}</span
+  >
+</small>

@@ -37,7 +37,7 @@ const fallbackImage = await getImage({
 });
 ---
 
-<picture class={className}>
+<picture class:list={[className, "block h-svh w-full overflow-hidden"]}>
   <source
     media={`(min-width: ${breakpoint}px)`}
     srcset={desktopImage.src}
@@ -49,6 +49,7 @@ const fallbackImage = await getImage({
     alt={alt}
     loading="lazy"
     decoding="async"
-    class="aspect-375/812 md:aspect-1440/880 w-full h-svh"
+    data-kv-parallax
+    class="aspect-375/812 h-[110svh] w-full object-cover md:aspect-1440/880"
   />
 </picture>

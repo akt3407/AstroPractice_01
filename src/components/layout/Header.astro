@@ -1,7 +1,9 @@
 ---
 import { Image } from "astro:assets";
 
-import logo from "@/assets/logo-header.svg";
+import logo from "@/assets/logo.svg";
+import HoverUnderline from "@/components/ui/common/HoverUnderline.astro";
+import { PAGES } from "@/constants/site";
 import ArrowIcon from "@/svgs/arrow.svg?raw";
 ---
 
@@ -44,23 +46,26 @@ import ArrowIcon from "@/svgs/arrow.svg?raw";
     <ul
       class="divide-border flex flex-col divide-y font-mono text-[1.4rem] md:flex-row md:gap-x-20 md:divide-y-0"
     >
-      <li class="pt-42 pb-16 md:py-16">
-        <a href="#about">ABOUT</a>
-      </li>
-      <li class="py-16">
-        <a href="#feature">FEATURE</a>
-      </li>
-      <li class="py-16">
-        <a href="#product">PRODUCT</a>
-      </li>
-      <li class="py-16">
-        <a href="#gallery">GALLERY</a>
-      </li>
-      <li class="py-16">
+      {
+        PAGES.map((page, index) => (
+          <li
+            class="translate-y-30 pt-42 pb-16 opacity-0 transition duration-700 ease-out not-first:pt-16 group-data-[menu-open=true]:translate-y-0 group-data-[menu-open=true]:opacity-100 md:translate-y-0 md:py-16 md:opacity-100 md:transition-none"
+            style={`transition-delay: ${(index + 1) * 100}ms`}
+          >
+            <a href={page.href}>
+              <HoverUnderline>{page.label}</HoverUnderline>
+            </a>
+          </li>
+        ))
+      }
+      <li
+        class="translate-y-30 py-16 opacity-0 transition duration-700 ease-out group-data-[menu-open=true]:translate-y-0 group-data-[menu-open=true]:opacity-100 md:hidden"
+        style={`transition-delay: ${(PAGES.length + 1) * 100}ms`}
+      >
         <!-- SP用CONTACT -->
         <a
           href="#"
-          class="flex items-center gap-10 md:hidden"
+          class="flex items-center gap-10"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -74,7 +79,7 @@ import ArrowIcon from "@/svgs/arrow.svg?raw";
   <!-- PC用CONTACT -->
   <a
     href="#"
-    class="md:border-border md:text-12 hidden md:flex md:items-center md:gap-16 md:border md:py-14 md:pr-10 md:pl-16 md:leading-[1.4] md:font-medium"
+    class="md:border-border md:text-12 hidden md:flex md:items-center md:gap-16 md:border md:py-14 md:pr-10 md:pl-16 md:leading-[1.4] md:font-medium md:transition-colors md:duration-600 md:hover:bg-black md:hover:text-white"
     target="_blank"
     rel="noopener noreferrer"
   >

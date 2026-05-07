@@ -1,0 +1,37 @@
+---
+interface Props {
+  as?: string;
+  class?: string;
+  group?: boolean;
+}
+
+const {
+  as: Tag = "div",
+  class: className,
+  group = false,
+  ...rest
+}: Props = Astro.props;
+---
+
+<Tag
+  class:list={["fade-in", className]}
+  data-fade-in
+  data-fade-group={group ? "" : null}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style is:global>
+  [data-fade-in]:not([data-fade-group]),
+  [data-fade-group] > * {
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-fade-in]:not([data-fade-group]),
+    [data-fade-group] > * {
+      opacity: 1;
+    }
+  }
+</style>

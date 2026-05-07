@@ -1,3 +1,83 @@
 ---
+import { Image } from "astro:assets";
 
+import footerImg from "@/assets/img-footer.jpg";
+import Logo from "@/assets/logo-footer.svg";
+import HoverUnderline from "@/components/ui/common/HoverUnderline.astro";
+import { PAGES } from "@/constants/site";
+import { SNSS } from "@/constants/site";
 ---
+
+<footer class="bg-black text-white">
+  <div class="px-20 pt-46 pb-24 md:px-30 md:pt-80 md:pb-20">
+    <div
+      class="grid grid-cols-4 grid-rows-[1fr_4fr_2fr] gap-20 md:grid-cols-12 md:grid-rows-[2fr_2fr_0.7fr]"
+    >
+      <Image
+        class="col-start-1 col-end-4 row-start-1 aspect-250/70 w-250 md:col-end-7 md:aspect-680/191 md:w-680"
+        src={Logo}
+        alt=""
+      />
+      <dl
+        class="col-start-1 col-end-5 row-start-2 mt-30 md:col-end-7 md:self-start"
+      >
+        <div
+          class="border-border-dark border-b pb-32 md:grid md:grid-cols-6 md:pb-33"
+        >
+          <dt class="text-16a/tight font-mono font-semibold">Address</dt>
+          <dd class="text-16b/[1.16] mt-12 md:col-start-3 md:col-end-6 md:mt-3">
+            〒000-1234 愛知県名古屋市1234
+          </dd>
+        </div>
+        <div
+          class="border-border-dark border-b py-20 md:grid md:grid-cols-6 md:py-32"
+        >
+          <dt class="text-16a/tight font-mono font-semibold">Navigation</dt>
+          <dd class="mt-12 md:col-start-3 md:col-end-7 md:mt-0">
+            <ul class="text-16b/[1.16] flex font-mono">
+              {
+                PAGES.map((page, index) => (
+                  <li
+                    class={`after:mx-8 after:text-gray-400 after:content-['/'] ${
+                      index === PAGES.length - 1 ? "after:content-none" : ""
+                    }`}
+                  >
+                    <a href={page.href}>
+                      <HoverUnderline>{page.label}</HoverUnderline>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </dd>
+        </div>
+        <div
+          class="border-border-dark border-b py-20 md:grid md:grid-cols-6 md:py-32"
+        >
+          <dt class="text-16a/tight font-mono font-semibold">SNS</dt>
+          <dd class="text-16b/[1.16] mt-12 md:col-start-3 md:col-end-7 md:mt-0">
+            {
+              SNSS.map((sns, index) => (
+                <a
+                  class={`after:mx-8 after:text-gray-400 after:content-['/'] ${index === SNSS.length - 1 ? "after:content-none" : ""}`}
+                  href={sns.href}
+                >
+                  <HoverUnderline>{sns.label}</HoverUnderline>
+                </a>
+              ))
+            }
+          </dd>
+        </div>
+      </dl>
+      <small
+        class="col-start-1 col-end-3 row-start-3 self-end font-mono text-[1.2rem]/[1.4] md:col-end-2"
+        >©KAGU 2025</small
+      >
+      <Image
+        class="col-start-3 col-end-5 row-start-3 mt-5 aspect-157/142 w-157 md:col-start-8 md:col-end-13 md:row-start-1 md:row-end-4 md:mt-0 md:aspect-563/646 md:w-563"
+        src={footerImg}
+        alt=""
+      />
+    </div>
+  </div>
+</footer>

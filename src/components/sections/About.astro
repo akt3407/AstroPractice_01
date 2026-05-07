@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
 
+import FadeIn from "../ui/common/FadeIn.astro";
+
 import aboutImage01 from "@/assets/img-about-01.jpg";
 import aboutImage02 from "@/assets/img-about-02.jpg";
 import aboutImage03 from "@/assets/img-about-03.jpg";
@@ -16,34 +18,36 @@ import SectionLabel from "@/components/ui/section/SectionLabel.astro";
         >目的を持ってつくられ、<br class="md:hidden" />
         時を超えて愛される家具。</SectionHeading
       >
-      <p
-        class="text-16a/[1.8] mt-14 h-264 tracking-[0.04em] md:mt-30 md:ml-4 md:h-150"
-      >
-        KOZOUでは、家具は単なる道具ではなく、そこに込め<br
-          class="md:hidden"
-        />られた手仕事・想い・文化の結晶だと考えています。<br
-          class="hidden md:block"
-        />私<br
-          class="md:hidden"
-        />たちが届ける家具はすべて、熟練の職人が素材選びか<br
-          class="md:hidden"
-        />ら仕上げまで一貫して丁寧に手がけた一点ものです。<br
-          class="hidden md:block"
-        />
-        「使い手の心に響き、時間とともに美しく育ち、語るべ<br
-          class="md:hidden"
-        />き物語を持つ家具」それが私たちの目指すものづくり<br
-          class="md:hidden"
-        />です。<br
-          class="hidden md:block"
-        />すべての家具が唯一無二である理由。<br class="md:hidden" />
-        それは、すべての手と人生が唯一無二だから。<br />
-        伝統への敬意と、普遍的な美意識を持って、世代を超<br
-          class="md:hidden"
-        />えて受け継がれる家具を、今日もひとつずつ、丁寧に。
-      </p>
+      <FadeIn>
+        <p
+          class="text-16a/[1.8] mt-14 h-264 tracking-[0.04em] md:mt-30 md:ml-4 md:h-150"
+        >
+          KOZOUでは、家具は単なる道具ではなく、そこに込め<br
+            class="md:hidden"
+          />られた手仕事・想い・文化の結晶だと考えています。<br
+            class="hidden md:block"
+          />私<br
+            class="md:hidden"
+          />たちが届ける家具はすべて、熟練の職人が素材選びか<br
+            class="md:hidden"
+          />ら仕上げまで一貫して丁寧に手がけた一点ものです。<br
+            class="hidden md:block"
+          />
+          「使い手の心に響き、時間とともに美しく育ち、語るべ<br
+            class="md:hidden"
+          />き物語を持つ家具」それが私たちの目指すものづくり<br
+            class="md:hidden"
+          />です。<br
+            class="hidden md:block"
+          />すべての家具が唯一無二である理由。<br class="md:hidden" />
+          それは、すべての手と人生が唯一無二だから。<br />
+          伝統への敬意と、普遍的な美意識を持って、世代を超<br
+            class="md:hidden"
+          />えて受け継がれる家具を、今日もひとつずつ、丁寧に。
+        </p>
+      </FadeIn>
     </div>
-    <div class="mt-60 md:mt-99 md:flex md:items-start">
+    <FadeIn group class="mt-60 md:mt-99 md:flex md:items-start">
       <Image
         class="aspect-246/183 w-246 md:aspect-447/332 md:w-447"
         src={aboutImage01}
@@ -54,7 +58,7 @@ import SectionLabel from "@/components/ui/section/SectionLabel.astro";
         src={aboutImage02}
         alt=""
       />
-    </div>
+    </FadeIn>
     <div
       class="marquee-wrap relative mt-98 overflow-hidden whitespace-nowrap md:mt-130"
     >
@@ -70,19 +74,21 @@ import SectionLabel from "@/components/ui/section/SectionLabel.astro";
       <h2 class="text-32/normal font-medium tracking-[0.04em]">
         熟練の職人による緻密な設計
       </h2>
-      <p class="text-16a/[1.8] mt-14 tracking-[0.04em] md:mt-30">
-        手道具だけを使い、時間をかけて、丁寧に。<br />
-        その椅子は今も、友人の家にあります。<br />
-        すっかり馴染みながらも、決して壊れていない。<br />
-        それは、私たちの原点であり、<br />
-        ものづくりの本質を思い出させてくれる存在です。
-      </p>
+      <FadeIn>
+        <p class="text-16a/[1.8] mt-14 tracking-[0.04em] md:mt-30">
+          手道具だけを使い、時間をかけて、丁寧に。<br />
+          その椅子は今も、友人の家にあります。<br />
+          すっかり馴染みながらも、決して壊れていない。<br />
+          それは、私たちの原点であり、<br />
+          ものづくりの本質を思い出させてくれる存在です。
+        </p>
+      </FadeIn>
     </div>
-    <Image
+    <FadeIn
       class="mt-37 aspect-335/273 w-335 md:mt-0 md:aspect-593/644 md:w-593"
-      src={aboutImage03}
-      alt=""
-    />
+    >
+      <Image src={aboutImage03} alt="" />
+    </FadeIn>
   </div>
 </section>
 

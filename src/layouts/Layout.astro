@@ -4,6 +4,7 @@ import "@fontsource/noto-sans-jp";
 import "../styles/global.css";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
+import Loading from "@/components/ui/Loading.astro";
 
 interface Props {
   title?: string;
@@ -37,8 +38,74 @@ const {
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
-    <Header />
-    <slot />
-    <Footer />
+    <Loading />
+
+    <div id="content" class="invisible">
+      <Header />
+      <slot />
+      <Footer />
+    </div>
   </body>
 </html>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!matchMedia("(prefers-reduced-motion:reduce)").matches) {
+    document
+      .querySelectorAll<HTMLElement>("[data-fade-group]")
+      .forEach((group) => {
+        ScrollTrigger.create({
+          trigger: group,
+          start: "top 80%",
+          once: true,
+          onEnter: () =>
+            gsap.to(group.children, {
+              opacity: 1,
+              y: 0,
+              duration: 1.2,
+              ease: "power1.out",
+              stagger: 0.15,
+            }),
+        });
+      });
+
+    ScrollTrigger.batch("[data-fade-in]:not([data-fade-group])", {
+      start: "top 85%",
+      once: true,
+      onEnter: (els) =>
+        gsap.to(els, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power1.out",
+          stagger: 0.1,
+        }),
+    });
+  }
+
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document
+      .querySelectorAll<HTMLElement>("[data-section-label]")
+      .forEach((label) => {
+        const text = label.querySelector<HTMLElement>(
+          "[data-section-label-text]",
+        );
+        if (!text) return;
+
+        ScrollTrigger.create({
+          trigger: label,
+          start: "top 85%",
+          once: true,
+          onEnter: () =>
+            gsap.to(text, {
+              yPercent: -100,
+              duration: 0.8,
+              ease: "power1.out",
+            }),
+        });
+      });
+  }
+</script>
