@@ -45,6 +45,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: calc(10 / 375 * 100vw);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   @media (min-width: 768px) {
     html {
