@@ -46,7 +46,7 @@
     text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: calc(10 / 375 * 100vw);
+    font-size: calc(10 / 390 * 100vw);
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
