@@ -17,8 +17,8 @@
   --text-32: clamp(2.4rem, 2.22vw, 3.2rem); /* 24〜32px */
   --text-24a: clamp(2rem, 1.67vw, 2.4rem); /* 20〜24px */
   --text-24b: clamp(1.8rem, 1.67vw, 2.4rem); /* 18〜24px */
-  --text-16a: clamp(1.4rem, 1.11vw, 1.6rem); /* 14〜16px */
-  --text-16b: clamp(1.2rem, 1.11vw, 1.6rem); /* 12〜16px */
+  --text-16a: clamp(1.4rem, 1vw, 1.6rem); /* 14〜16px */
+  --text-16b: clamp(1.2rem, 1vw, 1.6rem); /* 12〜16px */
   --text-14: clamp(1.3rem, 0.97vw, 1.4rem); /* 13〜14px */
   --text-12: clamp(1rem, 0.83vw, 1.2rem); /* 10〜12px */
 

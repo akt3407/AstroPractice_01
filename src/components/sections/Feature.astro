@@ -18,13 +18,13 @@ const featureImageList = Object.keys(featureImages)
   .sort()
   .map((key) => featureImages[key].default);
 
-interface Props {
+interface CardItem {
   number: string;
   title: string;
   description: string;
 }
 
-const cards: Props[] = [
+const cards: CardItem[] = [
   {
     number: "01",
     title: "職人による一点もの",
