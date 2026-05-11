@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
 /* デザイントークン */
 @theme {
@@ -43,7 +44,6 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
     font-size: calc(10 / 375 * 100vw);
   }
   @media (min-width: 768px) {
