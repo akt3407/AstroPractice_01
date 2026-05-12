@@ -22,6 +22,7 @@ interface CardItem {
   number: string;
   title: string;
   description: string;
+  alt: string;
 }
 
 const cards: CardItem[] = [
@@ -30,18 +31,21 @@ const cards: CardItem[] = [
     title: "職人による一点もの",
     description:
       'すべての家具は、熟練の職人が一点ずつ手仕事で仕上<br class="md:hidden" />げています。<br />木目の個性、細部の仕口、触れたときの感触にまで気<br class="md:hidden">を配った仕上がりは、大量生産にはない温もりと品格<br class="md:hidden">を宿します。',
+    alt: "木製椅子のフレームを丁寧に調整する職人の手元。背景には温かい光のテーブルランプとサイドボード",
   },
   {
     number: "02",
     title: "素材を活かすデザイン",
     description:
       '無垢材や天然塗料など、自然素材の魅力を活かすシン<br class="md:hidden" />プルなデザインが特徴。木の表情を隠さず、素材<br class="md:hidden" />の“声”をそのまま活かすことで、空間にすっとなじむ静<br />かな存在感を放ちます。',
+    alt: "天然木の節を活かしたサイドテーブル。天板の上には黒いマグカップと本、リンゴが置かれている",
   },
   {
     number: "03",
     title: "経年変化が楽しめる",
     description:
       '無垢材や自然素材は、生きているように表情を変えて<br class="md:hidden">いきます。<br class="hidden md:block"/>磨かれ、傷つき、艶を帯びながら、その変化さ<br class="md:hidden">えも「味」となるように設計されています。',
+    alt: "有機的な曲線を持つ一枚板のローテーブルと、リネン素材のローソファが置かれたモダンなリビング",
   },
 ];
 ---
@@ -89,7 +93,7 @@ const cards: CardItem[] = [
                 />
                 <Image
                   src={featureImageList[i]}
-                  alt={card.title}
+                  alt={card.alt}
                   class="mt-26 aspect-334/195 w-full md:aspect-330/193 md:w-330"
                 />
               </FadeIn>
