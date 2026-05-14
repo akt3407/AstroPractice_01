@@ -1,4 +1,4 @@
-# 🚀 AstroPractice_Part.1
+# 🚀 AstroPractice_01
 
 ## 📖 概要
 
