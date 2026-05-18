@@ -1,5 +1,6 @@
 ---
 import FadeIn from "../ui/common/FadeIn.astro";
+import GridBox from "../ui/common/GridBox.astro";
 
 import ProductList from "@/components/ui/product/ProductList.astro";
 import SectionHeading from "@/components/ui/section/SectionHeading.astro";
@@ -10,8 +11,8 @@ const productLists = Array.from({ length: 12 }, (_, i) => ({
 }));
 ---
 
-<section class="bg-black text-white">
-  <div class="px-20 py-80 text-center md:px-30 md:py-120">
+<GridBox class="bg-black text-white">
+  <div class="col-span-full py-86 text-center md:py-120">
     <SectionLabel label="(PRODUCT)" />
     <SectionHeading class="md:mt-31"
       >一つひとつ、丁寧に。<br
@@ -28,9 +29,9 @@ const productLists = Array.from({ length: 12 }, (_, i) => ({
     </FadeIn>
     <FadeIn
       group
-      class="mt-49 grid grid-cols-2 gap-x-20 gap-y-16 md:mt-100 md:grid-cols-4 md:gap-y-40"
+      class="mt-49 grid grid-cols-2 gap-x-20 gap-y-16 md:mt-100 md:grid-cols-4"
     >
       {productLists.map((product) => <ProductList id={product.id} />)}
     </FadeIn>
   </div>
-</section>
+</GridBox>

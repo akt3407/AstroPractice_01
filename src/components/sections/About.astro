@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 
 import FadeIn from "../ui/common/FadeIn.astro";
+import GridBox from "../ui/common/GridBox.astro";
 
 import aboutImage01 from "@/assets/img-about-01.jpg";
 import aboutImage02 from "@/assets/img-about-02.jpg";
@@ -10,67 +11,59 @@ import SectionHeading from "@/components/ui/section/SectionHeading.astro";
 import SectionLabel from "@/components/ui/section/SectionLabel.astro";
 ---
 
-<section id="about">
-  <div class="px-20 pt-86 md:px-30 md:pt-150">
-    <div class="md:pl-117">
-      <SectionLabel label="(ABOUT)" />
-      <SectionHeading
-        >目的を持ってつくられ、<br class="md:hidden" />
-        時を超えて愛される家具。</SectionHeading
-      >
-      <FadeIn>
-        <p
-          class="text-16a/[1.8] mt-14 h-264 tracking-[0.04em] md:mt-30 md:ml-4 md:h-150"
-        >
-          KOZOUでは、家具は単なる道具ではなく、そこに込め<br
-            class="md:hidden"
-          />られた手仕事・想い・文化の結晶だと考えています。<br
-            class="hidden md:block"
-          />私<br
-            class="md:hidden"
-          />たちが届ける家具はすべて、熟練の職人が素材選びか<br
-            class="md:hidden"
-          />ら仕上げまで一貫して丁寧に手がけた一点ものです。<br
-            class="hidden md:block"
-          />
-          「使い手の心に響き、時間とともに美しく育ち、語るべ<br
-            class="md:hidden"
-          />き物語を持つ家具」それが私たちの目指すものづくり<br
-            class="md:hidden"
-          />です。<br
-            class="hidden md:block"
-          />すべての家具が唯一無二である理由。<br class="md:hidden" />
-          それは、すべての手と人生が唯一無二だから。<br />
-          伝統への敬意と、普遍的な美意識を持って、世代を超<br
-            class="md:hidden"
-          />えて受け継がれる家具を、今日もひとつずつ、丁寧に。
-        </p>
-      </FadeIn>
-    </div>
-    <FadeIn group class="mt-60 md:mt-99 md:flex md:items-start">
+<GridBox id="about" class="content-start">
+  <div
+    class="col-span-4 col-start-1 pt-86 md:col-span-7 md:col-start-2 md:row-start-1 md:pt-150"
+  >
+    <SectionLabel label="(ABOUT)" />
+    <SectionHeading
+      >目的を持ってつくられ、<br
+        class="md:hidden"
+      />時を超えて愛される家具。</SectionHeading
+    >
+    <FadeIn>
+      <p class="text-16a/[1.8] mt-14 tracking-[0.04em] md:mt-30 md:ml-4">
+        KOZOUでは、家具は単なる道具ではなく、そこに込められた手仕事・想い・文化の結晶だと考えています。<br
+          class="hidden md:block"
+        />私たちが届ける家具はすべて、熟練の職人が素材選びから仕上げまで一貫して丁寧に手がけた一点ものです。「使い手の心に響き、時間とともに美しく育ち、語るべき物語を持つ家具」それが私たちの目指すものづくりです。すべての家具が唯一無二である理由。<br
+          class="md:hidden"
+        />それは、すべての手と人生が唯一無二だから。<br
+        />伝統への敬意と、普遍的な美意識を持って、世代を超えて受け継がれる家具を、今日もひとつずつ、丁寧に。
+      </p>
+    </FadeIn>
+  </div>
+  <div
+    class="col-span-4 col-start-1 md:col-span-12 md:col-start-1 md:row-start-2"
+  >
+    <FadeIn
+      group
+      class="mt-60 grid grid-cols-4 gap-x-20 md:mt-99 md:grid-cols-12"
+    >
       <Image
-        class="aspect-246/183 w-246 md:aspect-447/332 md:w-447"
+        class="col-span-3 col-start-1 aspect-246/183 md:col-span-4 md:col-start-1 md:aspect-447/332"
         src={aboutImage01}
         alt="ペーパーコードの座面とダークブラウンの木製フレームが特徴的なYチェアのクローズアップ"
       />
       <Image
-        class="mt-38 ml-auto aspect-246/327 w-246 md:mt-0 md:ml-20 md:aspect-913/685 md:w-913"
+        class="col-span-3 col-start-2 mt-38 aspect-246/327 md:col-span-8 md:col-start-5 md:mt-0 md:aspect-913/685"
         src={aboutImage02}
         alt="落ち着いた緑色の天板と深い色味の木製フレームを組み合わせたデスク。上には開かれた本とキャンドル"
       />
     </FadeIn>
-    <div
-      class="marquee-wrap relative mt-98 overflow-hidden whitespace-nowrap md:mt-130"
-    >
-      <p class="text-170 animation-scroll-rtl inline-block">
+    <div class="marquee-wrap relative mt-98 overflow-hidden md:mt-130">
+      <p
+        class="animation-scroll-rtl text-170 inline-block tracking-[0.01em] whitespace-nowrap"
+      >
         FOUNDED IN 1998,FOUNDED IN 1998,
       </p>
     </div>
   </div>
   <div
-    class="mt-87 flex flex-col px-20 pb-80 md:mt-136 md:flex-row-reverse md:items-center md:justify-end md:gap-137 md:px-0 md:pb-122"
+    class="col-span-full mt-87 mb-80 grid grid-cols-subgrid md:mt-136 md:mb-122"
   >
-    <div>
+    <div
+      class="col-span-4 col-start-1 md:col-span-4 md:col-start-7 md:row-start-3 md:pt-196"
+    >
       <h2 class="text-32/normal font-medium tracking-[0.04em]">
         熟練の職人による緻密な設計
       </h2>
@@ -84,15 +77,17 @@ import SectionLabel from "@/components/ui/section/SectionLabel.astro";
         </p>
       </FadeIn>
     </div>
-    <FadeIn>
+    <FadeIn
+      class="col-span-4 col-start-1 mt-37 md:col-span-5 md:col-start-1 md:row-start-3 md:mt-0 md:-ml-30"
+    >
       <Image
-        class="aspect-335 273 md:aspect-593 644 mt-37 md:mt-0 md:w-593"
+        class="md:h-644"
         src={aboutImage03}
         alt="自然な木の形状を活かした丸テーブルと、枝を生けた花瓶が置かれた明るい和モダンのリビング空間"
       />
     </FadeIn>
   </div>
-</section>
+</GridBox>
 
 <style>
   .marquee-wrap::before,

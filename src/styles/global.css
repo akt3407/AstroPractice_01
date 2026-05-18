@@ -7,8 +7,10 @@
   --spacing: 0.1rem;
 
   /* フォント */
-  --font-sans: "Noto Sans JP", sans-serif;
-  --font-mono: "Lato", monospace;
+  --font-jp:
+    "Noto Sans JP Variable", -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", "YuGothic", Meiryo, sans-serif;
+  --font-en: "Lato", sans-serif;
 
   /* font-size（基準幅: 1440px） */
   --text-170: clamp(8.8rem, 11.81vw, 17rem); /* 88〜170px */
@@ -17,8 +19,12 @@
   --text-32: clamp(2.4rem, 2.22vw, 3.2rem); /* 24〜32px */
   --text-24a: clamp(2rem, 1.67vw, 2.4rem); /* 20〜24px */
   --text-24b: clamp(1.8rem, 1.67vw, 2.4rem); /* 18〜24px */
-  --text-16a: clamp(1.4rem, 1vw, 1.6rem); /* 14〜16px */
-  --text-16b: clamp(1.2rem, 1vw, 1.6rem); /* 12〜16px */
+  --text-16a: clamp(
+    1.4rem,
+    calc(1.1714rem + 0.2976vw),
+    1.6rem
+  ); /* 14〜16px (768→1440pxで線形補間) */
+  --text-16b: clamp(1.2rem, 1.11vw, 1.6rem); /* 12〜16px */
   --text-14: clamp(1.3rem, 0.97vw, 1.4rem); /* 13〜14px */
   --text-12: clamp(1rem, 0.83vw, 1.2rem); /* 10〜12px */
 
@@ -46,7 +52,7 @@
     text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: min(calc(10 / 390 * 100vw), 10px);
+    font-size: min(calc(10 / 375 * 100vw), 10px);
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
@@ -57,7 +63,7 @@
   }
 
   body {
-    font-family: var(--font-sans);
+    font-family: var(--font-jp);
     line-height: 1;
     color: var(--color-black);
     font-feature-settings: "palt";
@@ -82,6 +88,7 @@
   h3,
   h4 {
     overflow-wrap: break-word;
-    word-break: auto-phrase;
+    /* word-break: auto-phrase; */
+    text-wrap: pretty;
   }
 }

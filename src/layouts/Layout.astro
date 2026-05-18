@@ -1,6 +1,6 @@
 ---
 import "@fontsource/lato";
-import "@fontsource/noto-sans-jp";
+import "@fontsource-variable/noto-sans-jp/wght.css";
 import "../styles/global.css";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
@@ -40,12 +40,11 @@ const {
   </head>
   <body>
     <Loading />
-
-    <div id="content" class="invisible">
-      <Header />
+    <Header />
+    <main id="content" class="invisible">
       <slot />
-      <Footer />
-    </div>
+    </main>
+    <Footer />
   </body>
 </html>
 
@@ -108,28 +107,5 @@ const {
           stagger: 0.1,
         }),
     });
-  }
-
-  if (!prefersReducedMotion) {
-    document
-      .querySelectorAll<HTMLElement>("[data-section-label]")
-      .forEach((label) => {
-        const text = label.querySelector<HTMLElement>(
-          "[data-section-label-text]",
-        );
-        if (!text) return;
-
-        ScrollTrigger.create({
-          trigger: label,
-          start: "top 85%",
-          once: true,
-          onEnter: () =>
-            gsap.to(text, {
-              yPercent: -100,
-              duration: 0.8,
-              ease: "power1.out",
-            }),
-        });
-      });
   }
 </script>

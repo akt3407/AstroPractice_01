@@ -1,0 +1,44 @@
+- generic [active] [ref=e1]:
+  - paragraph [ref=e3]: 5%
+  - banner [ref=e4]:
+    - link "KAGU" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - img "KAGU" [ref=e6]
+    - button "メニューを開く" [ref=e7]
+    - navigation "グローバルナビゲーション":
+      - list [ref=e10]:
+        - listitem [ref=e11]:
+          - link "ABOUT" [ref=e12] [cursor=pointer]:
+            - /url: "#about"
+            - generic [ref=e13]: ABOUT
+        - listitem [ref=e14]:
+          - link "FEATURE" [ref=e15] [cursor=pointer]:
+            - /url: "#feature"
+            - generic [ref=e16]: FEATURE
+        - listitem [ref=e17]:
+          - link "PRODUCT" [ref=e18] [cursor=pointer]:
+            - /url: "#product"
+            - generic [ref=e19]: PRODUCT
+        - listitem [ref=e20]:
+          - link "GALLERY" [ref=e21] [cursor=pointer]:
+            - /url: "#gallery"
+            - generic [ref=e22]: GALLERY
+        - listitem [ref=e23]:
+          - link "CONTACT （新しいタブで開く）" [ref=e24] [cursor=pointer]:
+            - /url: "#"
+            - text: CONTACT
+            - img [ref=e25]
+            - generic [ref=e27]: （新しいタブで開く）
+  - generic [ref=e30]:
+    - button "Menu" [ref=e31]:
+      - img [ref=e33]
+      - generic: Menu
+    - button "Inspect" [ref=e37]:
+      - img [ref=e39]
+      - generic: Inspect
+    - button "Audit" [ref=e41]:
+      - img [ref=e43]
+      - generic: Audit
+    - button "Settings" [ref=e46]:
+      - img [ref=e48]
+      - generic: Settings

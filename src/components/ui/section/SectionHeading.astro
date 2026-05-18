@@ -13,10 +13,124 @@ const { class: className = "" } = Astro.props;
   ]}
   data-section-label
 >
-  <span
-    class="inline-block transform-[translateY(100%)] will-change-transform motion-reduce:transform-[translateY(0)]"
-    data-section-label-text
-  >
-    <slot />
-  </span>
+  <slot />
 </h2>
+
+<script>
+  const SPACE_CHARS = new Set([" ", " ", "　"]);
+
+  function wrapTextNodes(node: Node) {
+    Array.from(node.childNodes).forEach((child) => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        const text = child.textContent ?? "";
+        if (!text) return;
+        const frag = document.createDocumentFragment();
+        for (const char of text) {
+          if (SPACE_CHARS.has(char)) {
+            frag.appendChild(document.createTextNode(char));
+            continue;
+          }
+          const wrap = document.createElement("span");
+          wrap.className = "char-wrap";
+          wrap.style.display = "inline-block";
+          wrap.style.overflow = "hidden";
+          wrap.style.verticalAlign = "bottom";
+          const inner = document.createElement("span");
+          inner.className = "char";
+          inner.style.display = "inline-block";
+          inner.style.transform = "translateY(100%)";
+          inner.style.willChange = "transform";
+          inner.textContent = char;
+          wrap.appendChild(inner);
+          frag.appendChild(wrap);
+        }
+        child.replaceWith(frag);
+      } else if (
+        child.nodeType === Node.ELEMENT_NODE &&
+        (child as Element).tagName !== "BR"
+      ) {
+        const childEl = child as HTMLElement;
+        if (childEl.hasAttribute("data-section-label-text")) {
+          // Pre-existing translateY wrapper (e.g. SectionLabel) would compound
+          // with the per-char translateY animations applied inside it.
+          childEl.style.transform = "none";
+        }
+        wrapTextNodes(child);
+      }
+    });
+  }
+
+  function splitByLines(el: HTMLElement) {
+    if (el.dataset.originalHtml === undefined) {
+      el.dataset.originalHtml = el.innerHTML;
+    }
+    el.innerHTML = el.dataset.originalHtml;
+
+    wrapTextNodes(el);
+
+    const chars = Array.from(el.querySelectorAll<HTMLElement>(".char"));
+    if (!chars.length) return;
+
+    let currentTop: number | null = null;
+    let lineIndex = -1;
+    chars.forEach((char) => {
+      const top = Math.round(char.getBoundingClientRect().top);
+      if (currentTop === null || Math.abs(top - currentTop) > 2) {
+        currentTop = top;
+        lineIndex++;
+      }
+      char.dataset.line = String(lineIndex);
+    });
+  }
+
+  function revealChars(el: HTMLElement, animated: boolean) {
+    el.querySelectorAll<HTMLElement>(".char").forEach((char) => {
+      const line = Number(char.dataset.line ?? 0);
+      char.style.transition = animated
+        ? `transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${line * 0.12}s`
+        : "none";
+      char.style.transform = "translateY(0%)";
+    });
+  }
+
+  function initSectionLabels() {
+    const headings = document.querySelectorAll<HTMLElement>(
+      "[data-section-label]",
+    );
+
+    headings.forEach((el) => splitByLines(el));
+
+    const revealed = new WeakSet<HTMLElement>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const target = entry.target as HTMLElement;
+          revealChars(target, true);
+          revealed.add(target);
+          observer.unobserve(target);
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    headings.forEach((el) => observer.observe(el));
+
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        document
+          .querySelectorAll<HTMLElement>("[data-section-label]")
+          .forEach((el) => {
+            splitByLines(el);
+            if (revealed.has(el)) revealChars(el, false);
+          });
+      }, 200);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initSectionLabels);
+  initSectionLabels();
+</script>

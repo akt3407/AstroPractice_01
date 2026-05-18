@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 
 import FadeIn from "../ui/common/FadeIn.astro";
+import GridBox from "../ui/common/GridBox.astro";
 import SectionLabel from "../ui/section/SectionLabel.astro";
 
 import imgGallery1 from "@/assets/img-gallery-01.jpg";
@@ -11,53 +12,35 @@ import imgGallery4 from "@/assets/img-gallery-04.jpg";
 import imgGallery5 from "@/assets/img-gallery-05.jpg";
 ---
 
-<section class="bg-black text-white">
-  <div class="px-20 pt-41 md:px-30 md:pt-20 md:pb-0">
-    <SectionLabel label="(GALLERY)" />
-    <div class="mt-32 md:mt-80">
-      <FadeIn>
-        <Image
-          class="aspect-335/418 md:aspect-447/558 md:w-447"
-          src={imgGallery1}
-          alt="Cozy Minimalist Interior"
-        />
-      </FadeIn>
-      <FadeIn>
-        <Image
-          class="mt-20 aspect-335/235 md:mt-140 md:ml-583 md:aspect-680/476 md:w-680"
-          src={imgGallery2}
-          alt="Modern Living Room Scene"
-        />
-      </FadeIn>
-      <FadeIn>
-        <Image
-          class="mt-20 aspect-335/443 md:mt-140 md:ml-117 md:aspect-564/747 md:w-564"
-          src={imgGallery3}
-          alt="Wooden Rattan Dressers"
-        />
-      </FadeIn>
-      <FadeIn>
-        <Image
-          class="mt-20 aspect-335/503 md:mt-140 md:ml-583 md:aspect-680/1019 md:w-680"
-          src={imgGallery4}
-          alt="Rustic Serenity Wooden Chair"
-        />
-      </FadeIn>
-    </div>
-  </div>
-  <FadeIn class="pb-54 md:mx-0 md:mt-140 md:pb-0">
-    <div
-      class="m-auto mt-20 aspect-335/280 overflow-hidden md:mt-0 md:aspect-1440/1203 md:w-1440"
+<GridBox class="bg-black text-white">
+  <div
+    class="col-span-full pt-36 md:grid md:grid-cols-subgrid md:pt-20 md:pb-0"
+  >
+    <SectionLabel class="md:col-start-1 md:row-start-1" label="(GALLERY)" />
+    <FadeIn class="mt-32 md:col-span-4 md:col-start-1 md:row-start-2 md:mt-80">
+      <Image src={imgGallery1} alt="Cozy Minimalist Interior" />
+    </FadeIn>
+    <FadeIn class="mt-20 md:col-span-6 md:col-start-6 md:row-start-3 md:mt-140">
+      <Image src={imgGallery2} alt="Modern Living Room Scene" />
+    </FadeIn>
+    <FadeIn class="mt-20 md:col-span-5 md:col-start-2 md:row-start-4 md:mt-140">
+      <Image src={imgGallery3} alt="Wooden Rattan Dressers" />
+    </FadeIn>
+    <FadeIn class="mt-20 md:col-span-6 md:col-start-6 md:row-start-5 md:mt-140">
+      <Image src={imgGallery4} alt="Rustic Serenity Wooden Chair" />
+    </FadeIn>
+    <FadeIn
+      class="mt-20 overflow-hidden object-cover pb-54 md:col-span-full md:row-start-6 md:-mx-30 md:mt-140 md:aspect-1440/1203 md:pb-0"
     >
       <Image
-        class="h-[110%] w-full object-cover"
+        class="h-[110%] w-full"
         src={imgGallery5}
         alt="Scandinavian Living Room"
         data-gallery-parallax
       />
-    </div>
-  </FadeIn>
-</section>
+    </FadeIn>
+  </div>
+</GridBox>
 
 <script>
   import { gsap } from "gsap";

@@ -1,20 +1,21 @@
 ---
 import kvImageSp from "@/assets/img-kv-sp.jpg";
 import kvImage from "@/assets/img-kv.jpg";
+import GridBox from "@/components/ui/common/GridBox.astro";
 import KvResponsiveImage from "@/components/ui/kv/KvResponsiveImage.astro";
 ---
 
-<section class="h-svh">
-  <div>
+<GridBox>
+  <div
+    class="relative col-span-4 col-start-1 -mx-20 h-svh md:col-span-12 md:col-start-1 md:-mx-30"
+  >
     <KvResponsiveImage desktopSrc={kvImage} mobileSrc={kvImageSp} alt="" />
-  </div>
-  <div class="relative z-5">
     <div class="absolute bottom-140 left-20 md:bottom-70 md:left-30">
       <h1 class="text-64/[1.2] font-bold tracking-[0.02em] text-white">
         あなたとともに、<br />
         変化する家具
       </h1>
-      <p class="mt-21 text-[1.4rem]/normal font-medium text-white md:mt-29">
+      <p class="text-14/normal mt-21 font-medium text-white md:mt-29">
         木の香り、手のぬくもり、時間が育てる風合い<br />
         ここにしかない家具を、あなたの暮らしへ。
       </p>
@@ -28,10 +29,10 @@ import KvResponsiveImage from "@/components/ui/kv/KvResponsiveImage.astro";
         <span class="scroll-dot aspect-square h-auto w-4 rounded-full bg-black"
         ></span>
       </div>
-      <span class="font-mono text-base font-bold text-white">ScrollDown</span>
+      <span class="font-en text-[1.6rem] font-bold text-white">ScrollDown</span>
     </div>
   </div>
-</section>
+</GridBox>
 
 <style>
   @keyframes scroll-dot {

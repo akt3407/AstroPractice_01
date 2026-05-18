@@ -1,13 +1,14 @@
 ---
 interface Props {
   label: string;
+  class?: string;
 }
 
-const { label } = Astro.props;
+const { label, class: _class } = Astro.props;
 ---
 
 <small
-  class="text-16a inline-block overflow-hidden font-mono leading-none font-bold md:ml-4"
+  class={`font-en text-16a inline-block overflow-hidden leading-none font-bold md:ml-4 ${_class}`}
   data-section-label
 >
   <span
