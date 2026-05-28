@@ -65,7 +65,7 @@ import KvResponsiveImage from "@/components/ui/kv/KvResponsiveImage.astro";
     const trigger = target?.closest("section") ?? target;
     if (target && trigger) {
       gsap.to(target, {
-        yPercent: -10,
+        yPercent: 10,
         ease: "none",
         scrollTrigger: {
           trigger,

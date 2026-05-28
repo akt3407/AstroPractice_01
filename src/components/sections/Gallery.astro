@@ -52,7 +52,7 @@ import imgGallery5 from "@/assets/img-gallery-05.jpg";
       .querySelectorAll<HTMLElement>("[data-gallery-parallax]")
       .forEach((target) => {
         gsap.to(target, {
-          yPercent: -10,
+          yPercent: 10,
           ease: "none",
           scrollTrigger: {
             trigger: target,
