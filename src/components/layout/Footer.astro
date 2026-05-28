@@ -29,7 +29,7 @@ import { SNSS } from "@/constants/site";
       <div
         class="border-border-dark border-b py-20 md:grid md:grid-cols-6 md:py-32"
       >
-        <dt class="text-16a/tight font-en font-s">Navigation</dt>
+        <dt class="text-16a/tight font-en font-semibold">Navigation</dt>
         <dd class="mt-12 md:col-span-4 md:col-start-3 md:mt-0">
           <ul class="text-16b/[1.16] font-en flex">
             {
@@ -39,7 +39,7 @@ import { SNSS } from "@/constants/site";
                     index === PAGES.length - 1 ? "after:content-none" : ""
                   }`}
                 >
-                  <a href={page.href}>
+                  <a href={page.href} data-scroll={page.scroll}>
                     <HoverUnderline>{page.label}</HoverUnderline>
                   </a>
                 </li>

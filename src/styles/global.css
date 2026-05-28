@@ -55,6 +55,8 @@
     font-size: min(calc(10 / 375 * 100vw), 10px);
     -ms-overflow-style: none;
     scrollbar-width: none;
+    scroll-behavior: smooth;
+    scroll-padding-top: 40px;
   }
   @media (min-width: 768px) {
     html {

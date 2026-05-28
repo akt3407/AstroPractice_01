@@ -49,6 +49,7 @@ import ArrowIcon from "@/svgs/arrow.svg?raw";
           <li class="before:bg-border relative pt-42 pb-16 not-first:pt-16 before:absolute before:inset-x-0 before:top-0 before:h-px before:origin-left before:scale-x-0 before:transition-transform before:duration-1200 before:ease-out before:content-[''] group-data-[menu-open=true]:before:scale-x-100 first:before:hidden md:py-16 md:before:hidden">
             <a
               href={page.href}
+              data-scroll={page.scroll}
               class="inline-block overflow-hidden md:overflow-visible"
             >
               <span class="inline-block translate-y-full transition-transform duration-1000 ease-out group-data-[menu-open=true]:translate-y-0 md:translate-y-0 md:transition-none">
@@ -120,10 +121,33 @@ import ArrowIcon from "@/svgs/arrow.svg?raw";
     overlay?.classList.toggle("pointer-events-none");
   });
 
-  overlay?.addEventListener("click", () => {
+  const closeMenu = () => {
     overlay?.classList.add("opacity-0", "pointer-events-none");
     button.setAttribute("aria-expanded", "false");
     button.setAttribute("aria-label", "メニューを開く");
     header.dataset.menuOpen = "false";
+  };
+
+  overlay?.addEventListener("click", closeMenu);
+
+  document.querySelectorAll("[data-scroll]").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const targetId = (e.currentTarget as HTMLElement).dataset.scroll;
+      const target = document.getElementById(targetId);
+
+      if (target) {
+        const lenis = (window as Window & { lenis?: import("lenis").default })
+          .lenis;
+        if (lenis) {
+          lenis.scrollTo(target, { offset: -80 });
+        } else {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+
+      closeMenu();
+    });
   });
 </script>

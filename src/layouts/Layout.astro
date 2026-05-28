@@ -68,6 +68,8 @@ const {
       wheelMultiplier: 0.8,
     });
 
+    (window as Window & { lenis?: Lenis }).lenis = lenis;
+
     lenis.on("scroll", ScrollTrigger.update);
 
     gsap.ticker.add((time) => {

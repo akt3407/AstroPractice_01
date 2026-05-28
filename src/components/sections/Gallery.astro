@@ -12,11 +12,14 @@ import imgGallery4 from "@/assets/img-gallery-04.jpg";
 import imgGallery5 from "@/assets/img-gallery-05.jpg";
 ---
 
-<GridBox class="bg-black text-white">
+<GridBox class="bg-black text-white" id="gallery">
   <div
-    class="col-span-full pt-36 md:grid md:grid-cols-subgrid md:pt-20 md:pb-0"
+    class="col-span-full pt-36 md:grid md:grid-cols-subgrid md:pt-100 md:pb-0"
   >
-    <SectionLabel class="md:col-start-1 md:row-start-1" label="(GALLERY)" />
+    <SectionLabel
+      class="md:col-span-2 md:col-start-1 md:row-start-1"
+      label="(GALLERY)"
+    />
     <FadeIn class="mt-32 md:col-span-4 md:col-start-1 md:row-start-2 md:mt-80">
       <Image src={imgGallery1} alt="Cozy Minimalist Interior" />
     </FadeIn>
