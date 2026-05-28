@@ -41,37 +41,40 @@ import ArrowIcon from "@/svgs/arrow.svg?raw";
   <nav
     aria-label="グローバルナビゲーション"
     id="nav-menu"
-    class="max-h-0 w-full overflow-hidden transition-[max-height] duration-1000 ease-out group-data-[menu-open=true]:max-h-[327px] md:mt-0 md:flex md:max-h-none md:w-auto md:overflow-visible md:transition-none"
+    class="max-h-0 w-full overflow-hidden transition-[max-height] duration-800 ease-out group-data-[menu-open=true]:max-h-[327px] md:mt-0 md:flex md:max-h-none md:w-auto md:overflow-visible md:transition-none"
   >
-    <ul
-      class="divide-border text-14 font-en flex flex-col divide-y md:flex-row md:gap-x-20 md:divide-y-0"
-    >
+    <ul class="text-14 font-en flex flex-col md:flex-row md:gap-x-20">
       {
-        PAGES.map((page, index) => (
-          <li
-            class="translate-y-30 pt-42 pb-16 opacity-0 transition duration-700 ease-out not-first:pt-16 group-data-[menu-open=true]:translate-y-0 group-data-[menu-open=true]:opacity-100 md:translate-y-0 md:py-16 md:opacity-100 md:transition-none"
-            style={`transition-delay: ${(index + 1) * 100}ms`}
-          >
-            <a href={page.href}>
-              <HoverUnderline>{page.label}</HoverUnderline>
+        PAGES.map((page) => (
+          <li class="before:bg-border relative pt-42 pb-16 not-first:pt-16 before:absolute before:inset-x-0 before:top-0 before:h-px before:origin-left before:scale-x-0 before:transition-transform before:duration-1200 before:ease-out before:content-[''] group-data-[menu-open=true]:before:scale-x-100 first:before:hidden md:py-16 md:before:hidden">
+            <a
+              href={page.href}
+              class="inline-block overflow-hidden md:overflow-visible"
+            >
+              <span class="inline-block translate-y-full transition-transform duration-1000 ease-out group-data-[menu-open=true]:translate-y-0 md:translate-y-0 md:transition-none">
+                <HoverUnderline>{page.label}</HoverUnderline>
+              </span>
             </a>
           </li>
         ))
       }
       <li
-        class="translate-y-30 py-16 opacity-0 transition duration-700 ease-out group-data-[menu-open=true]:translate-y-0 group-data-[menu-open=true]:opacity-100 md:hidden"
-        style={`transition-delay: ${(PAGES.length + 1) * 100}ms`}
+        class="before:bg-border relative py-16 before:absolute before:inset-x-0 before:top-0 before:h-px before:origin-left before:scale-x-0 before:transition-transform before:duration-1200 before:ease-out before:content-[''] group-data-[menu-open=true]:before:scale-x-100 md:hidden"
       >
         <!-- SP用CONTACT -->
         <a
           href="#"
-          class="flex items-center gap-10"
+          class="block overflow-hidden"
           target="_blank"
           rel="noopener noreferrer"
         >
-          CONTACT
-          <Fragment set:html={ArrowIcon} />
-          <span class="sr-only">（新しいタブで開く）</span>
+          <span
+            class="flex translate-y-full items-center gap-10 transition-transform duration-1200 ease-out group-data-[menu-open=true]:translate-y-0"
+          >
+            CONTACT
+            <Fragment set:html={ArrowIcon} />
+            <span class="sr-only">（新しいタブで開く）</span>
+          </span>
         </a>
       </li>
     </ul>
@@ -79,7 +82,7 @@ import ArrowIcon from "@/svgs/arrow.svg?raw";
   <!-- PC用CONTACT -->
   <a
     href="#"
-    class="md:border-border hidden md:flex md:items-center md:gap-16 md:border md:py-14 md:pr-10 md:pl-16 md:text-[1.2rem]/[1.4] md:font-medium md:transition-colors md:duration-600 md:hover:bg-black md:hover:text-white"
+    class="md:border-border hidden md:flex md:items-center md:gap-16 md:border md:py-14 md:pr-10 md:pl-16 md:text-[1.2rem]/[1.4] md:font-medium md:transition-colors md:duration-480 md:hover:bg-black md:hover:text-white"
     target="_blank"
     rel="noopener noreferrer"
   >
