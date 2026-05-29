@@ -39,7 +39,11 @@ import { SNSS } from "@/constants/site";
                     index === PAGES.length - 1 ? "after:content-none" : ""
                   }`}
                 >
-                  <a href={page.href} data-scroll={page.scroll}>
+                  <a
+                    href={page.href}
+                    data-scroll={page.scroll}
+                    class="uppercase"
+                  >
                     <HoverUnderline>{page.label}</HoverUnderline>
                   </a>
                 </li>

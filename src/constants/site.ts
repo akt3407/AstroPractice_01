@@ -10,25 +10,25 @@ export const PAGES: Page[] = [
     id: "0",
     href: "#about",
     scroll: "about",
-    label: "ABOUT",
+    label: "About",
   },
   {
     id: "1",
     href: "#feature",
     scroll: "feature",
-    label: "FEATURE",
+    label: "Feature",
   },
   {
     id: "2",
     href: "#product",
     scroll: "product",
-    label: "PRODUCT",
+    label: "Product",
   },
   {
     id: "3",
     href: "#gallery",
     scroll: "gallery",
-    label: "GALLERY",
+    label: "Gallery",
   },
 ];
 
