@@ -35,6 +35,8 @@ const { class: className = "" } = Astro.props;
           wrap.style.display = "inline-block";
           wrap.style.overflow = "hidden";
           wrap.style.verticalAlign = "bottom";
+          // 視覚用の文字断片は a11y ツリーから隠す（読み上げはコンテナの aria-label に任せる）
+          wrap.setAttribute("aria-hidden", "true");
           const inner = document.createElement("span");
           inner.className = "char";
           inner.style.display = "inline-block";
@@ -65,6 +67,12 @@ const { class: className = "" } = Astro.props;
       el.dataset.originalHtml = el.innerHTML;
     }
     el.innerHTML = el.dataset.originalHtml;
+
+    // 分割前の全文をコンテナの aria-label に退避（SR は1文字ずつでなく一息で読む）
+    if (!el.hasAttribute("aria-label")) {
+      const label = (el.textContent ?? "").replace(/\s+/g, " ").trim();
+      if (label) el.setAttribute("aria-label", label);
+    }
 
     wrapTextNodes(el);
 
