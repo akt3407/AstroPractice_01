@@ -17,7 +17,7 @@ const { class: className = "" } = Astro.props;
 </h2>
 
 <script>
-  const SPACE_CHARS = new Set([" ", " ", "　"]);
+  const SPACE_CHARS = new Set([" ", " ", "　"]);
 
   function wrapTextNodes(node: Node) {
     Array.from(node.childNodes).forEach((child) => {
@@ -69,20 +69,24 @@ const { class: className = "" } = Astro.props;
     el.innerHTML = el.dataset.originalHtml;
 
     // 分割前の全文をコンテナの aria-label に退避（SR は1文字ずつでなく一息で読む）
-    if (!el.hasAttribute("aria-label")) {
-      const label = (el.textContent ?? "").replace(/\s+/g, " ").trim();
-      if (label) el.setAttribute("aria-label", label);
-    }
+    // リセット時に aria-label も再計算する
+    el.removeAttribute("aria-label");
+    const label = (el.textContent ?? "").replace(/\s+/g, " ").trim();
+    if (label) el.setAttribute("aria-label", label);
 
     wrapTextNodes(el);
 
     const chars = Array.from(el.querySelectorAll<HTMLElement>(".char"));
     if (!chars.length) return;
 
+    // getBoundingClientRect をまとめて取得してからループすることで
+    // ループ内での強制レイアウト（レイアウトスラッシング）を防ぐ
+    const rects = chars.map((char) => char.getBoundingClientRect());
+
     let currentTop: number | null = null;
     let lineIndex = -1;
-    chars.forEach((char) => {
-      const top = Math.round(char.getBoundingClientRect().top);
+    chars.forEach((char, i) => {
+      const top = Math.round(rects[i].top);
       if (currentTop === null || Math.abs(top - currentTop) > 2) {
         currentTop = top;
         lineIndex++;
