@@ -1,15 +1,10 @@
 ---
-import { Image } from "astro:assets";
-
 import FadeIn from "../ui/common/FadeIn.astro";
 import GridBox from "../ui/common/GridBox.astro";
+import ResponsivePicture from "../ui/common/ResponsivePicture.astro";
 import SectionLabel from "../ui/section/SectionLabel.astro";
 
-import imgGallery1 from "@/assets/img-gallery-01.jpg";
-import imgGallery2 from "@/assets/img-gallery-02.jpg";
-import imgGallery3 from "@/assets/img-gallery-03.jpg";
-import imgGallery4 from "@/assets/img-gallery-04.jpg";
-import imgGallery5 from "@/assets/img-gallery-05.jpg";
+import { galleryImages } from "@/data/galleryImages";
 ---
 
 <GridBox class="bg-black text-white" id="gallery">
@@ -21,49 +16,85 @@ import imgGallery5 from "@/assets/img-gallery-05.jpg";
       label="(GALLERY)"
     />
     <FadeIn class="mt-32 md:col-span-4 md:col-start-1 md:row-start-2 md:mt-80">
-      <Image src={imgGallery1} alt="Cozy Minimalist Interior" />
+      <ResponsivePicture
+        mobileImg={galleryImages.img01.mobileImg}
+        desktopImg={galleryImages.img01.desktopImg}
+        alt="Cozy Minimalist Interior"
+        mobileWidth={335}
+        mobileHeight={418}
+        desktopWidth={447}
+        desktopHeight={558}
+      />
     </FadeIn>
     <FadeIn class="mt-20 md:col-span-6 md:col-start-6 md:row-start-3 md:mt-140">
-      <Image src={imgGallery2} alt="Modern Living Room Scene" />
+      <ResponsivePicture
+        mobileImg={galleryImages.img02.mobileImg}
+        desktopImg={galleryImages.img02.desktopImg}
+        alt="Modern Living Room Scene"
+        mobileWidth={335}
+        mobileHeight={235}
+        desktopWidth={680}
+        desktopHeight={476}
+      />
     </FadeIn>
     <FadeIn class="mt-20 md:col-span-5 md:col-start-2 md:row-start-4 md:mt-140">
-      <Image src={imgGallery3} alt="Wooden Rattan Dressers" />
+      <ResponsivePicture
+        mobileImg={galleryImages.img03.mobileImg}
+        desktopImg={galleryImages.img03.desktopImg}
+        alt="Wooden Rattan Dressers"
+        mobileWidth={335}
+        mobileHeight={443}
+        desktopWidth={564}
+        desktopHeight={747}
+      />
     </FadeIn>
     <FadeIn class="mt-20 md:col-span-6 md:col-start-6 md:row-start-5 md:mt-140">
-      <Image src={imgGallery4} alt="Rustic Serenity Wooden Chair" />
+      <ResponsivePicture
+        mobileImg={galleryImages.img04.mobileImg}
+        desktopImg={galleryImages.img04.desktopImg}
+        alt="Rustic Serenity Wooden Chair"
+        mobileWidth={335}
+        mobileHeight={503}
+        desktopWidth={680}
+        desktopHeight={1019}
+      />
     </FadeIn>
     <FadeIn
-      class="mt-20 overflow-hidden object-cover pb-54 md:col-span-full md:row-start-6 md:-mx-30 md:mt-140 md:aspect-1440/1203 md:pb-0"
+      class="mt-20 overflow-hidden object-cover pb-54 md:col-span-full md:row-start-6 md:-mx-30 md:mt-140 md:pb-0"
     >
-      <Image
-        class="h-[110%] w-full"
-        src={imgGallery5}
+      <ResponsivePicture
+        class="block"
+        mobileImg={galleryImages.img05.mobileImg}
+        desktopImg={galleryImages.img05.desktopImg}
         alt="Scandinavian Living Room"
-        data-gallery-parallax
+        mobileWidth={335}
+        mobileHeight={280}
+        desktopWidth={1440}
+        desktopHeight={1203}
       />
     </FadeIn>
   </div>
-</GridBox>
 
-<script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-  gsap.registerPlugin(ScrollTrigger);
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
 
-  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    document
-      .querySelectorAll<HTMLElement>("[data-gallery-parallax]")
-      .forEach((target) => {
-        gsap.to(target, {
-          yPercent: 10,
-          ease: "none",
-          scrollTrigger: {
-            trigger: target,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document
+        .querySelectorAll<HTMLElement>("[data-gallery-parallax]")
+        .forEach((target) => {
+          gsap.to(target, {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+              trigger: target,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
         });
-      });
-  }
-</script>
+    }
+  </script>
+</GridBox>
