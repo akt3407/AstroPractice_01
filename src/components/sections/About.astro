@@ -86,39 +86,3 @@ import SectionLabel from "@/components/ui/section/SectionLabel.astro";
     </FadeIn>
   </div>
 </GridBox>
-
-<style>
-  .marquee-wrap::before,
-  .marquee-wrap::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 15%;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .marquee-wrap::before {
-    left: 0;
-    background: linear-gradient(to right, #f2f2f2 0%, transparent 100%);
-  }
-
-  .marquee-wrap::after {
-    right: 0;
-    background: linear-gradient(to left, #f2f2f2 0%, transparent 100%);
-  }
-
-  @keyframes scroll-rtl {
-    from {
-      transform: translateX(0%);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  .animation-scroll-rtl {
-    animation: scroll-rtl 20s linear infinite;
-  }
-</style>
