@@ -1,14 +1,11 @@
 ---
-import { Image } from "astro:assets";
-
 import FadeIn from "../ui/common/FadeIn.astro";
 import GridBox from "../ui/common/GridBox.astro";
+import ResponsivePicture from "../ui/common/ResponsivePicture.astro";
 
-import aboutImage01 from "@/assets/img-about-01.jpg";
-import aboutImage02 from "@/assets/img-about-02.jpg";
-import aboutImage03 from "@/assets/img-about-03.jpg";
 import SectionHeading from "@/components/ui/section/SectionHeading.astro";
 import SectionLabel from "@/components/ui/section/SectionLabel.astro";
+import { aboutImages } from "@/data/aboutImages";
 ---
 
 <GridBox id="about" class="content-start">
@@ -39,15 +36,27 @@ import SectionLabel from "@/components/ui/section/SectionLabel.astro";
       group
       class="mt-60 grid grid-cols-4 gap-x-20 md:mt-99 md:grid-cols-12"
     >
-      <Image
-        class="col-span-3 col-start-1 aspect-246/183 md:col-span-4 md:col-start-1 md:aspect-447/332"
-        src={aboutImage01}
+      <ResponsivePicture
+        class="col-span-3 col-start-1 md:col-span-4 md:col-start-1"
+        imgClass=""
+        mobileImg={aboutImages.img01.mobileImg}
+        desktopImg={aboutImages.img01.desktopImg}
         alt="ペーパーコードの座面とダークブラウンの木製フレームが特徴的なYチェアのクローズアップ"
+        mobileWidth={246}
+        mobileHeight={183}
+        desktopWidth={447}
+        desktopHeight={332}
       />
-      <Image
-        class="col-span-3 col-start-2 mt-38 aspect-246/327 md:col-span-8 md:col-start-5 md:mt-0 md:aspect-913/685"
-        src={aboutImage02}
+      <ResponsivePicture
+        class="col-span-3 col-start-2 mt-38 md:col-span-8 md:col-start-5 md:mt-0"
+        imgClass="aspect-246/327 md:aspect-913/685"
+        mobileImg={aboutImages.img02.mobileImg}
+        desktopImg={aboutImages.img02.desktopImg}
         alt="落ち着いた緑色の天板と深い色味の木製フレームを組み合わせたデスク。上には開かれた本とキャンドル"
+        mobileWidth={246}
+        mobileHeight={327}
+        desktopWidth={913}
+        desktopHeight={685}
       />
     </FadeIn>
     <div class="marquee-wrap relative mt-98 overflow-hidden md:mt-130">
@@ -57,32 +66,36 @@ import SectionLabel from "@/components/ui/section/SectionLabel.astro";
         FOUNDED IN 1998,FOUNDED IN 1998,
       </p>
     </div>
-  </div>
-  <div
-    class="col-span-full mt-87 mb-80 grid grid-cols-subgrid md:mt-136 md:mb-122"
-  >
     <div
-      class="col-span-4 col-start-1 md:col-span-4 md:col-start-7 md:row-start-3 md:pt-196"
+      class="col-span-full mt-87 mb-80 grid grid-cols-subgrid md:mt-136 md:mb-122"
     >
-      <SectionHeading>熟練の職人による緻密な設計</SectionHeading>
-      <FadeIn>
-        <p class="text-16a/[1.8] mt-14 tracking-[0.04em] md:mt-30">
-          手道具だけを使い、時間をかけて、丁寧に。<br />
-          その椅子は今も、友人の家にあります。<br />
-          すっかり馴染みながらも、決して壊れていない。<br />
-          それは、私たちの原点であり、<br />
-          ものづくりの本質を思い出させてくれる存在です。
-        </p>
+      <div
+        class="col-span-4 col-start-1 md:col-span-4 md:col-start-7 md:row-start-3 md:pt-196"
+      >
+        <SectionHeading>熟練の職人による緻密な設計</SectionHeading>
+        <FadeIn>
+          <p class="text-16a/[1.8] mt-14 tracking-[0.04em] md:mt-30">
+            手道具だけを使い、時間をかけて、丁寧に。<br />
+            その椅子は今も、友人の家にあります。<br />
+            すっかり馴染みながらも、決して壊れていない。<br />
+            それは、私たちの原点であり、<br />
+            ものづくりの本質を思い出させてくれる存在です。
+          </p>
+        </FadeIn>
+      </div>
+      <FadeIn
+        class="col-span-4 col-start-1 mt-37 md:col-span-5 md:col-start-1 md:row-start-3 md:mt-0 md:-ml-30"
+      >
+        <ResponsivePicture
+          mobileImg={aboutImages.img03.mobileImg}
+          desktopImg={aboutImages.img03.desktopImg}
+          alt="自然な木の形状を活かした丸テーブルと、枝を生けた花瓶が置かれた明るい和モダンのリビング空間"
+          mobileWidth={335}
+          mobileHeight={273}
+          desktopWidth={593}
+          desktopHeight={644}
+        />
       </FadeIn>
     </div>
-    <FadeIn
-      class="col-span-4 col-start-1 mt-37 md:col-span-5 md:col-start-1 md:row-start-3 md:mt-0 md:-ml-30"
-    >
-      <Image
-        class="md:h-644"
-        src={aboutImage03}
-        alt="自然な木の形状を活かした丸テーブルと、枝を生けた花瓶が置かれた明るい和モダンのリビング空間"
-      />
-    </FadeIn>
   </div>
 </GridBox>
