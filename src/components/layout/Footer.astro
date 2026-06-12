@@ -1,7 +1,10 @@
 ---
 import { Image } from "astro:assets";
 
-import footerImg from "@/assets/img-footer.jpg";
+import ResponsivePicture from "../ui/common/ResponsivePicture.astro";
+
+import footerImgSp from "@/assets/img-footer-sp.jpg";
+import footerImgPc from "@/assets/img-footer.jpg";
 import Logo from "@/assets/logo-footer.svg";
 import HoverUnderline from "@/components/ui/common/HoverUnderline.astro";
 import { PAGES } from "@/constants/site";
@@ -74,10 +77,15 @@ import { SNSS } from "@/constants/site";
       class="font-en col-span-2 col-start-1 row-start-3 self-end text-[1.2rem]/[1.4] md:col-span-2"
       >©KAGU 2025</small
     >
-    <Image
-      class="col-span-2 col-start-3 row-start-3 mt-5 aspect-157/142 w-157 md:col-span-5 md:col-start-8 md:row-start-1 md:row-end-4 md:mt-0 md:aspect-563/646 md:h-646 md:w-563"
-      src={footerImg}
-      alt=""
+    <ResponsivePicture
+      class="col-span-2 col-start-3 row-start-3 mt-5 block md:col-span-5 md:col-start-8 md:row-start-1 md:row-end-4 md:mt-0"
+      mobileImg={footerImgSp}
+      desktopImg={footerImgPc}
+      alt="自然な木の形状を活かした丸テーブルと、枝を生けた花瓶が置かれた明るい和モダンのリビング空間"
+      mobileWidth={157}
+      mobileHeight={142}
+      desktopWidth={563}
+      desktopHeight={646}
     />
   </div>
 </footer>
