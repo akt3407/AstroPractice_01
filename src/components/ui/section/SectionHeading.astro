@@ -34,12 +34,14 @@ const { class: className = "" } = Astro.props;
           wrap.className = "char-wrap";
           wrap.style.display = "inline-block";
           wrap.style.overflow = "hidden";
-          wrap.style.verticalAlign = "bottom";
+          wrap.style.verticalAlign = "top";
+          wrap.style.lineHeight = "1";
           // 視覚用の文字断片は a11y ツリーから隠す（読み上げはコンテナの aria-label に任せる）
           wrap.setAttribute("aria-hidden", "true");
           const inner = document.createElement("span");
           inner.className = "char";
           inner.style.display = "inline-block";
+          inner.style.verticalAlign = "top";
           inner.style.transform = "translateY(100%)";
           inner.style.willChange = "transform";
           inner.textContent = char;
