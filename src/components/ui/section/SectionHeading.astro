@@ -1,9 +1,17 @@
 ---
 interface Props {
   class?: string;
+  heading: string;
 }
 
-const { class: className = "" } = Astro.props;
+const { class: className = "", heading } = Astro.props;
+
+// heading は <br>/<span> を含む HTML 文字列。タグを除いた素テキストを aria-label に
+// 明示し、SR には行マスク分割や境界スペースの影響なく1文として読ませる。
+const ariaLabel = heading
+  .replace(/<[^>]*>/g, "")
+  .replace(/\s+/g, " ")
+  .trim();
 ---
 
 <h2
@@ -12,137 +20,122 @@ const { class: className = "" } = Astro.props;
     className,
   ]}
   data-section-label
->
-  <slot />
-</h2>
+  aria-label={ariaLabel}
+  set:html={heading}
+/>
 
 <script>
-  const SPACE_CHARS = new Set([" ", " ", "　"]);
+  // 見出しを <br> 区切りで行マスク化し、行ごとにスライドアップで reveal する。
+  // 文字分割や座標計測は行わず、レスポンシブ改行は CSS（md:hidden な <br>）に委ねる。
 
-  function wrapTextNodes(node: Node) {
-    Array.from(node.childNodes).forEach((child) => {
-      if (child.nodeType === Node.TEXT_NODE) {
-        const text = child.textContent ?? "";
-        if (!text) return;
-        const frag = document.createDocumentFragment();
-        for (const char of text) {
-          if (SPACE_CHARS.has(char)) {
-            frag.appendChild(document.createTextNode(char));
-            continue;
-          }
-          const wrap = document.createElement("span");
-          wrap.className = "char-wrap";
-          wrap.style.display = "inline-block";
-          wrap.style.overflow = "hidden";
-          wrap.style.verticalAlign = "top";
-          wrap.style.lineHeight = "1";
-          // 視覚用の文字断片は a11y ツリーから隠す（読み上げはコンテナの aria-label に任せる）
-          wrap.setAttribute("aria-hidden", "true");
-          const inner = document.createElement("span");
-          inner.className = "char";
-          inner.style.display = "inline-block";
-          inner.style.verticalAlign = "top";
-          inner.style.transform = "translateY(100%)";
-          inner.style.willChange = "transform";
-          inner.textContent = char;
-          wrap.appendChild(inner);
-          frag.appendChild(wrap);
-        }
-        child.replaceWith(frag);
-      } else if (
-        child.nodeType === Node.ELEMENT_NODE &&
-        (child as Element).tagName !== "BR"
-      ) {
-        const childEl = child as HTMLElement;
-        if (childEl.hasAttribute("data-section-label-text")) {
-          // Pre-existing translateY wrapper (e.g. SectionLabel) would compound
-          // with the per-char translateY animations applied inside it.
-          childEl.style.transform = "none";
-        }
-        wrapTextNodes(child);
-      }
-    });
-  }
+  // <br> 境界で childNodes を行マスク（.line > .line-inner）に包む。
+  // <br> は元のまま（md:hidden クラス付き）マスク間に再挿入してレスポンシブ改行を保つ。
+  // SectionLabel は静的に同じマスク構造（[data-section-label-text]）を持つので再構築しない。
+  function buildLineInners(el: HTMLElement): HTMLElement[] {
+    const preBuilt = el.querySelector<HTMLElement>("[data-section-label-text]");
+    if (preBuilt) return [preBuilt];
 
-  function splitByLines(el: HTMLElement) {
-    if (el.dataset.originalHtml === undefined) {
-      el.dataset.originalHtml = el.innerHTML;
+    if (el.dataset.split === "true") {
+      return Array.from(el.querySelectorAll<HTMLElement>(".line-inner"));
     }
-    el.innerHTML = el.dataset.originalHtml;
 
-    // 分割前の全文をコンテナの aria-label に退避（SR は1文字ずつでなく一息で読む）
-    // リセット時に aria-label も再計算する
-    el.removeAttribute("aria-label");
-    const label = (el.textContent ?? "").replace(/\s+/g, " ").trim();
-    if (label) el.setAttribute("aria-label", label);
-
-    wrapTextNodes(el);
-
-    const chars = Array.from(el.querySelectorAll<HTMLElement>(".char"));
-    if (!chars.length) return;
-
-    // getBoundingClientRect をまとめて取得してからループすることで
-    // ループ内での強制レイアウト（レイアウトスラッシング）を防ぐ
-    const rects = chars.map((char) => char.getBoundingClientRect());
-
-    let currentTop: number | null = null;
-    let lineIndex = -1;
-    chars.forEach((char, i) => {
-      const top = Math.round(rects[i].top);
-      if (currentTop === null || Math.abs(top - currentTop) > 2) {
-        currentTop = top;
-        lineIndex++;
+    const groups: Node[][] = [[]];
+    const brs: HTMLElement[] = [];
+    Array.from(el.childNodes).forEach((node) => {
+      if (
+        node.nodeType === Node.ELEMENT_NODE &&
+        (node as Element).tagName === "BR"
+      ) {
+        brs.push(node as HTMLElement);
+        groups.push([]);
+      } else {
+        groups[groups.length - 1].push(node);
       }
-      char.dataset.line = String(lineIndex);
     });
+
+    el.textContent = "";
+    const inners: HTMLElement[] = [];
+    groups.forEach((group, i) => {
+      if (i > 0) el.appendChild(brs[i - 1]); // 元の <br> を再挿入（隙間防止のため前後に空白を入れない）
+      const hasContent = group.some(
+        (n) =>
+          n.nodeType === Node.ELEMENT_NODE ||
+          (n.textContent ?? "").trim() !== "",
+      );
+      if (!hasContent) {
+        group.forEach((n) => el.appendChild(n)); // 空白のみのグループはそのまま戻す
+        return;
+      }
+      const mask = document.createElement("span");
+      mask.className = "line";
+      mask.style.display = "inline-block";
+      mask.style.overflow = "hidden";
+      mask.style.verticalAlign = "top";
+      const inner = document.createElement("span");
+      inner.className = "line-inner";
+      inner.style.display = "inline-block";
+      inner.style.willChange = "transform";
+      inner.style.transform = "translateY(100%)";
+      group.forEach((n) => inner.appendChild(n));
+      mask.appendChild(inner);
+      el.appendChild(mask);
+      inners.push(inner);
+    });
+    el.dataset.split = "true";
+    return inners;
   }
 
-  function revealChars(el: HTMLElement, animated: boolean) {
-    el.querySelectorAll<HTMLElement>(".char").forEach((char) => {
-      const line = Number(char.dataset.line ?? 0);
-      char.style.transition = animated
-        ? `transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${line * 0.12}s`
+  function reveal(inners: HTMLElement[], animated: boolean) {
+    // 直前の兄弟が「実際に表示されている <br>」のときだけ視覚行を1段進める。
+    // <br class="md:hidden"> が CSS で消える PC では同一行扱いになり、
+    // 同じディレイで一括スライドアップするので br の位置で途切れない。
+    let row = 0;
+    inners.forEach((inner, i) => {
+      if (i > 0) {
+        const prev = inner.parentElement?.previousElementSibling;
+        const brVisible =
+          prev instanceof HTMLElement &&
+          prev.tagName === "BR" &&
+          getComputedStyle(prev).display !== "none";
+        if (brVisible) row++;
+      }
+      inner.style.transition = animated
+        ? `transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${row * 0.12}s`
         : "none";
-      char.style.transform = "translateY(0%)";
+      inner.style.transform = "translateY(0%)";
     });
   }
 
   function initSectionLabels() {
-    const headings = document.querySelectorAll<HTMLElement>(
-      "[data-section-label]",
-    );
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-    headings.forEach((el) => splitByLines(el));
+    document
+      .querySelectorAll<HTMLElement>("[data-section-label]")
+      .forEach((el) => {
+        const inners = buildLineInners(el);
+        if (!inners.length) return;
 
-    const revealed = new WeakSet<HTMLElement>();
+        if (reduceMotion) {
+          reveal(inners, false); // アニメ無しで即時表示
+          return;
+        }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const target = entry.target as HTMLElement;
-          revealChars(target, true);
-          revealed.add(target);
-          observer.unobserve(target);
-        });
-      },
-      { threshold: 0.1 },
-    );
-
-    headings.forEach((el) => observer.observe(el));
-
-    let resizeTimer: ReturnType<typeof setTimeout>;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        document
-          .querySelectorAll<HTMLElement>("[data-section-label]")
-          .forEach((el) => {
-            splitByLines(el);
-            if (revealed.has(el)) revealChars(el, false);
-          });
-      }, 200);
-    });
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              reveal(inners, true);
+              obs.unobserve(el);
+            });
+          },
+          // 画面下端から 25% 上に入ってから発火させ、ビューポート内で
+          // アニメが再生されるようにする（早すぎて見逃すのを防ぐ）
+          { threshold: 0, rootMargin: "0px 0px -25% 0px" },
+        );
+        observer.observe(el);
+      });
   }
 
   document.addEventListener("astro:page-load", initSectionLabels);

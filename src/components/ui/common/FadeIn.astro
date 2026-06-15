@@ -3,12 +3,15 @@ interface Props {
   as?: string;
   class?: string;
   group?: boolean;
+  /** フェード開始を遅らせる秒数。見出しの後に出したいときなどに指定 */
+  delay?: number;
 }
 
 const {
   as: Tag = "div",
   class: className,
   group = false,
+  delay = 0,
   ...rest
 }: Props = Astro.props;
 ---
@@ -17,6 +20,7 @@ const {
   class:list={["fade-in", className]}
   data-fade-in
   data-fade-group={group ? "" : null}
+  data-fade-delay={delay || null}
   {...rest}
 >
   <slot />

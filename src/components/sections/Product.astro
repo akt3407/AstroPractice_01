@@ -14,12 +14,11 @@ const productLists = Array.from({ length: 12 }, (_, i) => ({
 <GridBox class="bg-black text-white" id="product">
   <div class="col-span-full py-86 text-center md:py-0 md:pt-120 md:pb-40">
     <SectionLabel label="(PRODUCT)" />
-    <SectionHeading class="md:mt-31"
-      >一つひとつ、丁寧に。<br
-        class="md:hidden"
-      />ずっと使えるように。</SectionHeading
-    >
-    <FadeIn>
+    <SectionHeading
+      class="md:mt-31"
+      heading="一つひとつ、丁寧に。<br class='md:hidden'/>ずっと使えるように。"
+    />
+    <FadeIn delay={0.5}>
       <p class="text-16a/loose mt-10 tracking-[0.04em] md:mt-30">
         椅子やテーブル、どの家具にも<br class="md:hidden" />
         “あなただけの物語”が宿ります。<br />

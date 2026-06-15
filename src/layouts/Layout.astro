@@ -93,6 +93,7 @@ const {
               duration: 1.2,
               ease: "power1.out",
               stagger: 0.15,
+              delay: Number(group.dataset.fadeDelay) || 0,
             }),
         });
       });
@@ -100,14 +101,18 @@ const {
     ScrollTrigger.batch("[data-fade-in]:not([data-fade-group])", {
       start: "top 85%",
       once: true,
+      // data-fade-delay があれば要素ごとに開始を遅らせる（見出しの後に出す等）。
+      // stagger は手動で index*0.1 を足して再現。
       onEnter: (els) =>
-        gsap.to(els, {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "power1.out",
-          stagger: 0.1,
-        }),
+        els.forEach((el, i) =>
+          gsap.to(el, {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power1.out",
+            delay: (Number((el as HTMLElement).dataset.fadeDelay) || 0) + i * 0.1,
+          }),
+        ),
     });
   }
 </script>
