@@ -8,10 +8,6 @@ import SectionHeading from "@/components/ui/section/SectionHeading.astro";
 import SectionLabel from "@/components/ui/section/SectionLabel.astro";
 import { featureItems } from "@/data/featureItems";
 
-const mobileWidth = 334;
-const mobileHeight = 193;
-const desktopWidth = 330;
-const desktopHeight = 193;
 ---
 
 <GridBox
@@ -54,10 +50,10 @@ const desktopHeight = 193;
                 mobileImg={item.images.mobile}
                 desktopImg={item.images.desktop}
                 alt={item.alt}
-                mobileWidth={mobileWidth}
-                mobileHeight={mobileHeight}
-                desktopWidth={desktopWidth}
-                desktopHeight={desktopHeight}
+                mobileWidth={334}
+                mobileHeight={193}
+                desktopWidth={330}
+                desktopHeight={193}
                 class="mt-26 block"
                 imgClass="md:aspect-330/193 md:w-330"
               />
